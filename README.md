@@ -174,9 +174,9 @@ This project is licensed under the **MIT License**. See the [LICENSE](LICENSE) f
 
 For questions or feedback, feel free to reach out:
 
-- **Email**: your-email@example.com
-- **GitHub**: [@your-username](https://github.com/your-username)
-- **Website**: [Potentia Website](https://your-website.com)
+- **Email**: kidus489@gmail.com
+- **GitHub**: [@kidusabdula](https://github.com/kidusabdula)
+- **Website**: [Potentia Website](https://potentia.com)
 
 ---
 
