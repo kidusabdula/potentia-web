@@ -1,8 +1,7 @@
 import React from 'react'
 
-type Props = {}
 
-const page = (props: Props) => {
+const page = () => {
   return (
     <div className="flex min-h-screen flex-col items-center justify-center bg-black text-white">
       <h1 className="text-4xl font-bold">Welcome to Potentia</h1>
