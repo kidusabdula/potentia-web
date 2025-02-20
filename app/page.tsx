@@ -1,4 +1,8 @@
-export default function Home() {
+import React from 'react'
+
+type Props = {}
+
+const page = (props: Props) => {
   return (
     <div className="flex min-h-screen flex-col items-center justify-center bg-black text-white">
       <h1 className="text-4xl font-bold">Welcome to Potentia</h1>
@@ -6,3 +10,5 @@ export default function Home() {
     </div>
   );
 }
+
+export default page
