@@ -192,4 +192,3 @@ Thank you for checking out **Potentia**! We hope this project serves as a valuab
   - [Mapbox GL JS Documentation](https://docs.mapbox.com/mapbox-gl-js/api/)
   - [Recharts Documentation](https://recharts.org/en-US)
 
-
