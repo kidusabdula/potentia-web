@@ -16,7 +16,6 @@ export default function HomePage() {
      <IconSection/>
      <Team/>
      <Cards/>
-
     </>
   );
 }

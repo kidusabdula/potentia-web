@@ -89,7 +89,7 @@ const Sponsors = () => {
               />
             </svg>
             <div className="mt-6 text-zinc-300">
-              <p>"Truly great template and customer support."</p>
+              <p>&quot;Truly great template and customer support.&quot;</p>
             </div>
           </motion.div>
 
@@ -116,7 +116,7 @@ const Sponsors = () => {
             </svg>
 
             <div className="mt-6 text-zinc-300">
-              <p>"The best one I've ever come across."</p>
+              <p>&quot;The best one I&apos;ve ever come across.&quot;</p>
             </div>
           </motion.div>
 
@@ -143,7 +143,7 @@ const Sponsors = () => {
             </svg>
 
             <div className="mt-6 text-zinc-300">
-              <p>"This is a truly beautiful template."</p>
+              <p>&quot;This is a truly beautiful template.&quot;</p>
             </div>
           </motion.div>
 
@@ -257,7 +257,7 @@ const Sponsors = () => {
               </defs>
             </svg>
             <div className="mt-6 text-zinc-300">
-              <p>"The one theme that you want."</p>
+              <p>&quot;The one theme that you want.&quot;</p>
             </div>
           </motion.div>
 
@@ -323,7 +323,7 @@ const Sponsors = () => {
               />
             </svg>
             <div className="mt-6 text-zinc-300">
-              <p>"Great design and thorough documentation."</p>
+              <p>&quot;Great design and thorough documentation.&quot;</p>
             </div>
           </motion.div>
         </motion.div>

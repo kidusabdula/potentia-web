@@ -1,61 +1,91 @@
-"use client"
-
+"use client";
 import React, { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
-import { Button } from "@/components/ui/button"; // Assuming ShadCN Button component
+import { Button } from "@/components/ui/button";
 
 const Learn = () => {
-  // State to track which accordion is open
   const [openSection, setOpenSection] = useState<number | null>(null);
 
-  // Toggle function for accordions
   const toggleSection = (index: number) => {
     setOpenSection(openSection === index ? null : index);
   };
 
-  // Animation variants for accordion content
   const contentVariants = {
-    hidden: { opacity: 0, height: 0, transition: { duration: 0.3, ease: "easeInOut" } },
-    visible: { opacity: 1, height: "auto", transition: { duration: 0.3, ease: "easeInOut" } },
+    hidden: {
+      opacity: 0,
+      height: 0,
+      transition: { duration: 0.4, ease: "easeInOut" },
+    },
+    visible: {
+      opacity: 1,
+      height: "auto",
+      transition: { duration: 0.4, ease: "easeInOut" },
+    },
   };
 
-  // Animation variants for section fade-in
   const sectionVariants = {
-    hidden: { opacity: 0, y: 20 },
-    visible: { opacity: 1, y: 0, transition: { duration: 0.6, ease: "easeOut" } },
+    hidden: { opacity: 0, y: 30, scale: 0.98 },
+    visible: {
+      opacity: 1,
+      y: 0,
+      scale: 1,
+      transition: { duration: 0.7, ease: "easeOut" },
+    },
+  };
+
+  const fadeInVariants = {
+    hidden: { opacity: 0, y: -40 },
+    visible: { opacity: 1, y: 0, transition: { duration: 1, ease: "easeOut" } },
   };
 
   return (
-    <section className="relative bg-zinc-900/20 backdrop-blur-xl py-24 lg:py-32 text-white">
-      {/* Gradient Overlay for Depth */}
-      <div className="absolute inset-0 bg-gradient-to-b from-zinc-900/50 to-zinc-800/80 pointer-events-none" />
+    <section className="relative bg-zinc-900/20 backdrop-blur-xl pt-40 pb-24 lg:pt-48 lg:pb-32 text-white overflow-hidden">
+      <div className="absolute inset-0 bg-gradient-to-b from-zinc-900/60 via-zinc-900/40 to-zinc-800/80 pointer-events-none" />
+      <div
+        className="absolute inset-0 opacity-10"
+        style={{ background: "url('/noise.png') repeat" }}
+      />
 
-      {/* Header */}
       <motion.div
-        className="container text-center"
-        initial={{ opacity: 0, y: -30 }}
-        animate={{ opacity: 1, y: 0 }}
-        transition={{ duration: 0.8, ease: "easeOut" }}
+        className="max-w-4xl mx-auto text-center px-6 lg:px-12"
+        variants={fadeInVariants}
+        initial="hidden"
+        animate="visible"
       >
-        <h1 className="scroll-m-20 text-4xl font-light tracking-tight lg:text-5xl font-sans">
-          Learn About Bitcoin Mining
+        <h1 className="text-4xl md:text-5xl lg:text-6xl font-light tracking-tight font-sans bg-gradient-to-r from-white to-zinc-100 bg-clip-text">
+          Master Bitcoin Mining
         </h1>
-        <p className="mt-4 max-w-2xl mx-auto text-lg text-zinc-300">
-          Discover the technology, economics, and energy behind Bitcoin mining—unlocking the backbone of decentralized finance.
+        <p className="mt-6 text-lg md:text-xl text-zinc-300 leading-relaxed">
+          Unlock the secrets of Bitcoin mining—explore the tech, economics, and
+          energy driving the future of decentralized finance with
+          Potentia&apos;s expertise.
         </p>
       </motion.div>
 
       {/* Accordion Sections */}
-      <div className="container mt-12 space-y-6">
-        {/* Section 1: What is Bitcoin Mining? */}
-        <motion.div variants={sectionVariants} initial="hidden" whileInView="visible" viewport={{ once: true }}>
+      <div className="max-w-4xl mx-auto mt-16 space-y-8 px-6 lg:px-12">
+        <motion.div
+          variants={sectionVariants}
+          initial="hidden"
+          whileInView="visible"
+          viewport={{ once: true, amount: 0.2 }}
+          whileHover={{ scale: 1.02, transition: { duration: 0.3 } }}
+        >
           <div
-            className="bg-zinc-900/30 backdrop-blur-md rounded-lg border border-zinc-800/50 hover:border-zinc-700/50 cursor-pointer p-6"
+            className="bg-zinc-900/40 backdrop-blur-lg rounded-xl border border-zinc-800/60 hover:border-zinc-700/60 cursor-pointer p-6 shadow-lg hover:shadow-xl transition-all duration-300"
             onClick={() => toggleSection(1)}
           >
             <div className="flex justify-between items-center">
-              <h2 className="text-2xl font-semibold">What is Bitcoin Mining?</h2>
-              <span className="text-zinc-400">{openSection === 1 ? "−" : "+"}</span>
+              <h2 className="text-2xl md:text-3xl font-semibold text-white">
+                What is Bitcoin Mining?
+              </h2>
+              <motion.span
+                className="text-zinc-400 text-2xl"
+                animate={{ rotate: openSection === 1 ? 45 : 0 }}
+                transition={{ duration: 0.3 }}
+              >
+                +
+              </motion.span>
             </div>
             <AnimatePresence>
               {openSection === 1 && (
@@ -64,29 +94,60 @@ const Learn = () => {
                   initial="hidden"
                   animate="visible"
                   exit="hidden"
-                  className="mt-4 text-zinc-300"
+                  className="mt-6 text-zinc-300 leading-relaxed"
                 >
                   <p>
-                    Bitcoin mining is the process of validating transactions on the Bitcoin network and securing its blockchain. Miners use powerful computers to solve complex mathematical puzzles, known as proof-of-work (PoW), to add new blocks of transactions to the chain. In return, they earn newly minted Bitcoin (block rewards) and transaction fees.
+                    Bitcoin mining is the heartbeat of the world&apos;s first
+                    decentralized cryptocurrency. Miners use cutting-edge
+                    hardware to validate transactions and secure the Bitcoin
+                    blockchain through a process called proof-of-work (PoW). By
+                    solving intricate mathematical puzzles, they add new blocks
+                    of transactions, earning freshly minted Bitcoin and fees as
+                    rewards.
                   </p>
-                  <p className="mt-2">
-                    This decentralized system ensures no single entity controls the network, making it censorship-resistant and trustless. Mining keeps Bitcoin secure by making it computationally expensive to alter past transactions, requiring enormous energy and hardware resources.
+                  <p className="mt-4">
+                    This system eliminates central control, ensuring Bitcoin
+                    remains trustless and resistant to censorship. The
+                    computational intensity makes tampering with the blockchain
+                    prohibitively expensive, safeguarding its integrity. At
+                    Potentia, we harness this process to pioneer digital
+                    transformation.
                   </p>
+                  <Button
+                    variant="outline"
+                    className="mt-4 text-black"
+                    size="sm"
+                  >
+                    Explore More
+                  </Button>
                 </motion.div>
               )}
             </AnimatePresence>
           </div>
         </motion.div>
 
-        {/* Section 2: How Does Bitcoin Mining Work? */}
-        <motion.div variants={sectionVariants} initial="hidden" whileInView="visible" viewport={{ once: true }}>
+        <motion.div
+          variants={sectionVariants}
+          initial="hidden"
+          whileInView="visible"
+          viewport={{ once: true, amount: 0.2 }}
+          whileHover={{ scale: 1.02, transition: { duration: 0.3 } }}
+        >
           <div
-            className="bg-zinc-900/30 backdrop-blur-md rounded-lg border border-zinc-800/50 hover:border-zinc-700/50 cursor-pointer p-6"
+            className="bg-zinc-900/40 backdrop-blur-lg rounded-xl border border-zinc-800/60 hover:border-zinc-700/60 cursor-pointer p-6 shadow-lg hover:shadow-xl transition-all duration-300"
             onClick={() => toggleSection(2)}
           >
             <div className="flex justify-between items-center">
-              <h2 className="text-2xl font-semibold">How Does Bitcoin Mining Work?</h2>
-              <span className="text-zinc-400">{openSection === 2 ? "−" : "+"}</span>
+              <h2 className="text-2xl md:text-3xl font-semibold text-white">
+                How Does It Work?
+              </h2>
+              <motion.span
+                className="text-zinc-400 text-2xl"
+                animate={{ rotate: openSection === 2 ? 45 : 0 }}
+                transition={{ duration: 0.3 }}
+              >
+                +
+              </motion.span>
             </div>
             <AnimatePresence>
               {openSection === 2 && (
@@ -95,46 +156,73 @@ const Learn = () => {
                   initial="hidden"
                   animate="visible"
                   exit="hidden"
-                  className="mt-4 text-zinc-300"
+                  className="mt-6 text-zinc-300 leading-relaxed"
                 >
-                  <p>
-                    Bitcoin mining involves several key steps:
-                  </p>
-                  <ul className="list-disc pl-6 mt-2 space-y-2">
+                  <p>Bitcoin mining is a multi-step marvel of technology:</p>
+                  <ul className="list-disc pl-6 mt-4 space-y-3">
                     <li>
-                      <strong>Transaction Collection:</strong> Miners gather unconfirmed transactions from the network’s mempool into a candidate block.
+                      <strong>Transaction Gathering:</strong> Miners collect
+                      pending transactions into a block from the mempool.
                     </li>
                     <li>
-                      <strong>Hashing:</strong> Miners use the SHA-256 algorithm to hash the block’s data (including a nonce—a random number they adjust) repeatedly until the hash meets a specific difficulty target set by the network.
+                      <strong>Hashing Magic:</strong> Using SHA-256, miners
+                      tweak a nonce until the block&apos;s hash meets the
+                      network&apos;s difficulty—a cryptographic race.
                     </li>
                     <li>
-                      <strong>Difficulty Adjustment:</strong> The network adjusts the difficulty every 2,016 blocks (~2 weeks) to maintain an average block time of 10 minutes.
+                      <strong>Dynamic Difficulty:</strong> Adjusted every 2,016
+                      blocks, it keeps block times at 10 minutes as hashrate
+                      fluctuates.
                     </li>
                     <li>
-                      <strong>Block Addition:</strong> Once a valid hash is found, the block is broadcast to the network, verified by other nodes, and added to the blockchain.
+                      <strong>Block Validation:</strong> A winning hash gets
+                      broadcast, verified, and cemented into the blockchain.
                     </li>
                     <li>
-                      <strong>Reward:</strong> The successful miner receives the block reward (currently 3.125 BTC as of 2025, post-halving) plus transaction fees.
+                      <strong>Reward System:</strong> Miners earn 3.125 BTC (as
+                      of 2025) per block, plus fees—your ticket to the crypto
+                      economy.
                     </li>
                   </ul>
-                  <p className="mt-2">
-                    This process requires significant computational power, often provided by specialized hardware like ASICs (Application-Specific Integrated Circuits).
+                  <p className="mt-4">
+                    It&apos;s a high-stakes game powered by ASICs, and
+                    Potentia&apos;s facilities are built to win it efficiently.
                   </p>
+                  <Button
+                    variant="outline"
+                    className="mt-4 text-black"
+                    size="sm"
+                  >
+                    Dive Deeper
+                  </Button>
                 </motion.div>
               )}
             </AnimatePresence>
           </div>
         </motion.div>
 
-        {/* Section 3: Mining Hardware */}
-        <motion.div variants={sectionVariants} initial="hidden" whileInView="visible" viewport={{ once: true }}>
+        <motion.div
+          variants={sectionVariants}
+          initial="hidden"
+          whileInView="visible"
+          viewport={{ once: true, amount: 0.2 }}
+          whileHover={{ scale: 1.02, transition: { duration: 0.3 } }}
+        >
           <div
-            className="bg-zinc-900/30 backdrop-blur-md rounded-lg border border-zinc-800/50 hover:border-zinc-700/50 cursor-pointer p-6"
+            className="bg-zinc-900/40 backdrop-blur-lg rounded-xl border border-zinc-800/60 hover:border-zinc-700/60 cursor-pointer p-6 shadow-lg hover:shadow-xl transition-all duration-300"
             onClick={() => toggleSection(3)}
           >
             <div className="flex justify-between items-center">
-              <h2 className="text-2xl font-semibold">Mining Hardware</h2>
-              <span className="text-zinc-400">{openSection === 3 ? "−" : "+"}</span>
+              <h2 className="text-2xl md:text-3xl font-semibold text-white">
+                Mining Hardware Evolution
+              </h2>
+              <motion.span
+                className="text-zinc-400 text-2xl"
+                animate={{ rotate: openSection === 3 ? 45 : 0 }}
+                transition={{ duration: 0.3 }}
+              >
+                +
+              </motion.span>
             </div>
             <AnimatePresence>
               {openSection === 3 && (
@@ -143,43 +231,70 @@ const Learn = () => {
                   initial="hidden"
                   animate="visible"
                   exit="hidden"
-                  className="mt-4 text-zinc-300"
+                  className="mt-6 text-zinc-300 leading-relaxed"
                 >
                   <p>
-                    Bitcoin mining has evolved from simple CPUs to highly specialized equipment:
+                    From humble beginnings to industrial powerhouses, mining
+                    hardware has transformed:
                   </p>
-                  <ul className="list-disc pl-6 mt-2 space-y-2">
+                  <ul className="list-disc pl-6 mt-4 space-y-3">
                     <li>
-                      <strong>CPUs (2009):</strong> Early miners used standard computer processors, but these were quickly outpaced.
+                      <strong>CPUs (2009):</strong> Satoshi&apos;s era—basic PCs
+                      mined Bitcoin, but they couldn&apos;t keep up.
                     </li>
                     <li>
-                      <strong>GPUs (2010):</strong> Graphics cards offered more power, enabling miners to process multiple hashes simultaneously.
+                      <strong>GPUs (2010):</strong> Graphics cards brought
+                      parallel processing, boosting hashrates dramatically.
                     </li>
                     <li>
-                      <strong>FPGAs (2011):</strong> Field-Programmable Gate Arrays improved efficiency over GPUs but were still transitional.
+                      <strong>FPGAs (2011):</strong> A stepping stone—more
+                      efficient but soon overshadowed.
                     </li>
                     <li>
-                      <strong>ASICs (2013-Present):</strong> Application-Specific Integrated Circuits are custom-built for SHA-256 hashing, delivering unparalleled speed and energy efficiency. Modern miners like the Bitmain Antminer S19 dominate the industry.
+                      <strong>ASICs (2013-Now):</strong> Purpose-built for
+                      SHA-256, today&apos;s giants like the Antminer S19 deliver
+                      100+ TH/s. Potentia runs the latest to stay ahead.
                     </li>
                   </ul>
-                  <p className="mt-2">
-                    At Potentia, we leverage cutting-edge ASIC technology in our facilities to maximize hashrate while optimizing energy use—pushing the boundaries of high-performance computing.
+                  <p className="mt-4">
+                    Our high-performance computing approach optimizes every
+                    watt, turning raw power into profit.
                   </p>
+                  <Button
+                    variant="outline"
+                    className="mt-4 text-black"
+                    size="sm"
+                  >
+                    See the Tech
+                  </Button>
                 </motion.div>
               )}
             </AnimatePresence>
           </div>
         </motion.div>
 
-        {/* Section 4: Energy Consumption */}
-        <motion.div variants={sectionVariants} initial="hidden" whileInView="visible" viewport={{ once: true }}>
+        <motion.div
+          variants={sectionVariants}
+          initial="hidden"
+          whileInView="visible"
+          viewport={{ once: true, amount: 0.2 }}
+          whileHover={{ scale: 1.02, transition: { duration: 0.3 } }}
+        >
           <div
-            className="bg-zinc-900/30 backdrop-blur-md rounded-lg border border-zinc-800/50 hover:border-zinc-700/50 cursor-pointer p-6"
+            className="bg-zinc-900/40 backdrop-blur-lg rounded-xl border border-zinc-800/60 hover:border-zinc-700/60 cursor-pointer p-6 shadow-lg hover:shadow-xl transition-all duration-300"
             onClick={() => toggleSection(4)}
           >
             <div className="flex justify-between items-center">
-              <h2 className="text-2xl font-semibold">Energy Consumption</h2>
-              <span className="text-zinc-400">{openSection === 4 ? "−" : "+"}</span>
+              <h2 className="text-2xl md:text-3xl font-semibold text-white">
+                Energy & Sustainability
+              </h2>
+              <motion.span
+                className="text-zinc-400 text-2xl"
+                animate={{ rotate: openSection === 4 ? 45 : 0 }}
+                transition={{ duration: 0.3 }}
+              >
+                +
+              </motion.span>
             </div>
             <AnimatePresence>
               {openSection === 4 && (
@@ -188,40 +303,68 @@ const Learn = () => {
                   initial="hidden"
                   animate="visible"
                   exit="hidden"
-                  className="mt-4 text-zinc-300"
+                  className="mt-6 text-zinc-300 leading-relaxed"
                 >
                   <p>
-                    Bitcoin mining is energy-intensive due to the computational demands of proof-of-work. Estimates suggest the network consumes over 100 terawatt-hours (TWh) annually as of 2025—comparable to the energy use of a mid-sized country.
+                    Mining&apos;s energy appetite is massive—over 100 TWh yearly
+                    in 2025—but it&apos;s also an opportunity:
                   </p>
-                  <ul className="list-disc pl-6 mt-2 space-y-2">
+                  <ul className="list-disc pl-6 mt-4 space-y-3">
                     <li>
-                      <strong>Energy Sources:</strong> Miners often seek cheap electricity, with many operations using renewable sources like hydro, solar, or wind (e.g., in regions like Iceland or Texas).
+                      <strong>Power Sources:</strong> From hydro in Iceland to
+                      solar in Texas, miners tap renewables for cost and eco
+                      benefits.
                     </li>
                     <li>
-                      <strong>Sustainability:</strong> Critics highlight environmental concerns, but proponents argue mining can stabilize grids by consuming excess renewable energy that would otherwise go unused.
+                      <strong>Grid Harmony:</strong> Mining absorbs surplus
+                      energy, stabilizing grids and reducing waste—a win for
+                      sustainability.
                     </li>
                     <li>
-                      <strong>Potentia’s Approach:</strong> We integrate grid support into our mining operations, using surplus energy to reduce waste while powering our high-efficiency facilities.
+                      <strong>Potentia&apos;s Edge:</strong> We fuse grid
+                      support with mining, powering our facilities with
+                      efficiency and purpose.
                     </li>
                   </ul>
-                  <p className="mt-2">
-                    Energy efficiency is key—modern ASICs achieve hashrates of 100+ TH/s while consuming ~3,000 watts, a vast improvement over older tech.
+                  <p className="mt-4">
+                    With ASICs hitting 100+ TH/s at ~3kW, we&apos;re redefining
+                    energy use in the crypto age.
                   </p>
+                  <Button
+                    variant="outline"
+                    className="mt-4 text-black"
+                    size="sm"
+                  >
+                    Learn Our Strategy
+                  </Button>
                 </motion.div>
               )}
             </AnimatePresence>
           </div>
         </motion.div>
 
-        {/* Section 5: Economics of Mining */}
-        <motion.div variants={sectionVariants} initial="hidden" whileInView="visible" viewport={{ once: true }}>
+        <motion.div
+          variants={sectionVariants}
+          initial="hidden"
+          whileInView="visible"
+          viewport={{ once: true, amount: 0.2 }}
+          whileHover={{ scale: 1.02, transition: { duration: 0.3 } }}
+        >
           <div
-            className="bg-zinc-900/30 backdrop-blur-md rounded-lg border border-zinc-800/50 hover:border-zinc-700/50 cursor-pointer p-6"
+            className="bg-zinc-900/40 backdrop-blur-lg rounded-xl border border-zinc-800/60 hover:border-zinc-700/60 cursor-pointer p-6 shadow-lg hover:shadow-xl transition-all duration-300"
             onClick={() => toggleSection(5)}
           >
             <div className="flex justify-between items-center">
-              <h2 className="text-2xl font-semibold">Economics of Mining</h2>
-              <span className="text-zinc-400">{openSection === 5 ? "−" : "+"}</span>
+              <h2 className="text-2xl md:text-3xl font-semibold text-white">
+                Mining Economics
+              </h2>
+              <motion.span
+                className="text-zinc-400 text-2xl"
+                animate={{ rotate: openSection === 5 ? 45 : 0 }}
+                transition={{ duration: 0.3 }}
+              >
+                +
+              </motion.span>
             </div>
             <AnimatePresence>
               {openSection === 5 && (
@@ -230,46 +373,71 @@ const Learn = () => {
                   initial="hidden"
                   animate="visible"
                   exit="hidden"
-                  className="mt-4 text-zinc-300"
+                  className="mt-6 text-zinc-300 leading-relaxed"
                 >
-                  <p>
-                    Mining profitability depends on several factors:
-                  </p>
-                  <ul className="list-disc pl-6 mt-2 space-y-2">
+                  <p>Profitability in mining hinges on a delicate balance:</p>
+                  <ul className="list-disc pl-6 mt-4 space-y-3">
                     <li>
-                      <strong>Bitcoin Price:</strong> Higher BTC prices increase revenue per block mined.
+                      <strong>BTC Price:</strong> Soaring prices amplify block
+                      rewards—your revenue lifeline.
                     </li>
                     <li>
-                      <strong>Block Reward:</strong> Reduced by halving events every ~4 years (e.g., from 6.25 BTC in 2020 to 3.125 BTC in 2024), pushing miners to rely more on fees.
+                      <strong>Halving Impact:</strong> From 6.25 BTC (2020) to
+                      3.125 BTC (2024), rewards shrink, but fees rise with
+                      adoption.
                     </li>
                     <li>
-                      <strong>Electricity Costs:</strong> A major expense—miners aim for rates below $0.05/kWh to stay competitive.
+                      <strong>Energy Costs:</strong> Below $0.05/kWh is the
+                      sweet spot—Potentia secures the best rates.
                     </li>
                     <li>
-                      <strong>Hashrate & Difficulty:</strong> As more miners join, difficulty rises, requiring more power to earn rewards.
+                      <strong>Difficulty Curve:</strong> More miners, higher
+                      difficulty—only the efficient thrive.
                     </li>
                     <li>
-                      <strong>Hardware Costs:</strong> ASICs range from $2,000-$10,000 each, with lifespan and efficiency impacting ROI.
+                      <strong>Hardware Investment:</strong> $2k-$10k per ASIC,
+                      but longevity and power matter most.
                     </li>
                   </ul>
-                  <p className="mt-2">
-                    At Potentia, we optimize these variables with strategic facility locations and advanced tech, ensuring sustainable profitability for our operations and partners.
+                  <p className="mt-4">
+                    We optimize every factor, turning mining into a profitable
+                    venture for our partners.
                   </p>
+                  <Button
+                    variant="outline"
+                    className="mt-4 text-black"
+                    size="sm"
+                  >
+                    Calculate Your ROI
+                  </Button>
                 </motion.div>
               )}
             </AnimatePresence>
           </div>
         </motion.div>
 
-        {/* Section 6: Mining Pools */}
-        <motion.div variants={sectionVariants} initial="hidden" whileInView="visible" viewport={{ once: true }}>
+        <motion.div
+          variants={sectionVariants}
+          initial="hidden"
+          whileInView="visible"
+          viewport={{ once: true, amount: 0.2 }}
+          whileHover={{ scale: 1.02, transition: { duration: 0.3 } }}
+        >
           <div
-            className="bg-zinc-900/30 backdrop-blur-md rounded-lg border border-zinc-800/50 hover:border-zinc-700/50 cursor-pointer p-6"
+            className="bg-zinc-900/40 backdrop-blur-lg rounded-xl border border-zinc-800/60 hover:border-zinc-700/60 cursor-pointer p-6 shadow-lg hover:shadow-xl transition-all duration-300"
             onClick={() => toggleSection(6)}
           >
             <div className="flex justify-between items-center">
-              <h2 className="text-2xl font-semibold">Mining Pools</h2>
-              <span className="text-zinc-400">{openSection === 6 ? "−" : "+"}</span>
+              <h2 className="text-2xl md:text-3xl font-semibold text-white">
+                Mining Pools Unveiled
+              </h2>
+              <motion.span
+                className="text-zinc-400 text-2xl"
+                animate={{ rotate: openSection === 6 ? 45 : 0 }}
+                transition={{ duration: 0.3 }}
+              >
+                +
+              </motion.span>
             </div>
             <AnimatePresence>
               {openSection === 6 && (
@@ -278,43 +446,68 @@ const Learn = () => {
                   initial="hidden"
                   animate="visible"
                   exit="hidden"
-                  className="mt-4 text-zinc-300"
+                  className="mt-6 text-zinc-300 leading-relaxed"
                 >
                   <p>
-                    Solo mining is rare due to high difficulty—most miners join pools to combine hashrate and share rewards:
+                    Solo mining&apos;s a long shot—pools are the smart play:
                   </p>
-                  <ul className="list-disc pl-6 mt-2 space-y-2">
+                  <ul className="list-disc pl-6 mt-4 space-y-3">
                     <li>
-                      <strong>How Pools Work:</strong> Miners contribute computing power to a pool, which finds blocks collectively. Rewards are split based on contributed hashrate.
+                      <strong>Teamwork Wins:</strong> Pool hashrate, share
+                      rewards—steady income over luck.
                     </li>
                     <li>
-                      <strong>Popular Pools:</strong> Examples include F2Pool, AntPool, and Slush Pool, controlling significant portions of the network’s hashrate.
+                      <strong>Big Players:</strong> F2Pool, AntPool, Slush
+                      Pool—giants we align with.
                     </li>
                     <li>
-                      <strong>Pros:</strong> More consistent payouts compared to solo mining’s all-or-nothing approach.
+                      <strong>Upsides:</strong> Predictable payouts beat
+                      solo&apos;s feast-or-famine.
                     </li>
                     <li>
-                      <strong>Cons:</strong> Pool fees (1-3%) reduce individual profits, and centralization risks emerge if a few pools dominate.
+                      <strong>Trade-offs:</strong> 1-3% fees and centralization
+                      risks—worth watching.
                     </li>
                   </ul>
-                  <p className="mt-2">
-                    Potentia collaborates with top-tier pools to ensure our miners benefit from stable returns while advancing decentralized principles.
+                  <p className="mt-4">
+                    Potentia partners with elite pools, balancing profit and
+                    decentralization.
                   </p>
+                  <Button
+                    variant="outline"
+                    className="mt-4 text-black"
+                    size="sm"
+                  >
+                    Join a Pool
+                  </Button>
                 </motion.div>
               )}
             </AnimatePresence>
           </div>
         </motion.div>
 
-        {/* Section 7: Challenges & Future */}
-        <motion.div variants={sectionVariants} initial="hidden" whileInView="visible" viewport={{ once: true }}>
+        <motion.div
+          variants={sectionVariants}
+          initial="hidden"
+          whileInView="visible"
+          viewport={{ once: true, amount: 0.2 }}
+          whileHover={{ scale: 1.02, transition: { duration: 0.3 } }}
+        >
           <div
-            className="bg-zinc-900/30 backdrop-blur-md rounded-lg border border-zinc-800/50 hover:border-zinc-700/50 cursor-pointer p-6"
+            className="bg-zinc-900/40 backdrop-blur-lg rounded-xl border border-zinc-800/60 hover:border-zinc-700/60 cursor-pointer p-6 shadow-lg hover:shadow-xl transition-all duration-300"
             onClick={() => toggleSection(7)}
           >
             <div className="flex justify-between items-center">
-              <h2 className="text-2xl font-semibold">Challenges & Future of Mining</h2>
-              <span className="text-zinc-400">{openSection === 7 ? "−" : "+"}</span>
+              <h2 className="text-2xl md:text-3xl font-semibold text-white">
+                Challenges & The Road Ahead
+              </h2>
+              <motion.span
+                className="text-zinc-400 text-2xl"
+                animate={{ rotate: openSection === 7 ? 45 : 0 }}
+                transition={{ duration: 0.3 }}
+              >
+                +
+              </motion.span>
             </div>
             <AnimatePresence>
               {openSection === 7 && (
@@ -323,28 +516,38 @@ const Learn = () => {
                   initial="hidden"
                   animate="visible"
                   exit="hidden"
-                  className="mt-4 text-zinc-300"
+                  className="mt-6 text-zinc-300 leading-relaxed"
                 >
-                  <p>
-                    Bitcoin mining faces evolving challenges and opportunities:
-                  </p>
-                  <ul className="list-disc pl-6 mt-2 space-y-2">
+                  <p>Mining&apos;s future is full of hurdles and promise:</p>
+                  <ul className="list-disc pl-6 mt-4 space-y-3">
                     <li>
-                      <strong>Scalability:</strong> As difficulty rises, only large-scale operations with cheap energy remain viable.
+                      <strong>Scale Matters:</strong> Rising difficulty favors
+                      big ops—Potentia&apos;s ready.
                     </li>
                     <li>
-                      <strong>Regulation:</strong> Governments may impose restrictions on energy use or crypto activities, affecting profitability.
+                      <strong>Regulatory Winds:</strong> Energy laws could shift
+                      the game—we adapt fast.
                     </li>
                     <li>
-                      <strong>Halvings:</strong> Future reward reductions (e.g., 1.5625 BTC in 2028) will shift reliance to transaction fees, requiring higher network usage.
+                      <strong>Halving Horizon:</strong> 1.5625 BTC in 2028 means
+                      fees take center stage.
                     </li>
                     <li>
-                      <strong>Innovation:</strong> Advances in hardware efficiency and renewable energy integration could reshape the industry.
+                      <strong>Next-Gen Tech:</strong> Smarter ASICs and
+                      renewables are our future.
                     </li>
                   </ul>
-                  <p className="mt-2">
-                    Looking ahead, Potentia is pioneering sustainable mining solutions, leveraging our expertise in HPC and grid support to future-proof the ecosystem.
+                  <p className="mt-4">
+                    Potentia&apos;s HPC and grid innovations ensure mining
+                    thrives sustainably—join us on the frontier.
                   </p>
+                  <Button
+                    variant="outline"
+                    className="mt-4 text-black"
+                    size="sm"
+                  >
+                    Shape the Future
+                  </Button>
                 </motion.div>
               )}
             </AnimatePresence>
@@ -352,19 +555,24 @@ const Learn = () => {
         </motion.div>
       </div>
 
-      {/* CTA */}
       <motion.div
-        className="container mt-12 text-center"
-        initial={{ opacity: 0, y: 20 }}
+        className="max-w-4xl mx-auto mt-16 text-center px-6 lg:px-12"
+        initial={{ opacity: 0, y: 40 }}
         whileInView={{ opacity: 1, y: 0 }}
-        transition={{ duration: 0.6, ease: "easeOut" }}
+        transition={{ duration: 0.8, ease: "easeOut" }}
         viewport={{ once: true }}
       >
-        <p className="text-zinc-300 mb-6">
-          Ready to dive into Bitcoin mining with cutting-edge technology?
+        <p className="text-xl md:text-2xl text-zinc-300 mb-8 leading-relaxed">
+          Ready to harness Bitcoin mining&apos;s power with Potentia&apos;s
+          cutting-edge solutions?
         </p>
-        <Button variant="ghost" size="lg">
-          Get Started
+        <Button
+          variant="default"
+          size="lg"
+          className="group relative overflow-hidden bg-white text-black"
+        >
+          <span className="relative z-10">Get Started `{"->"}` </span>
+          <span className="absolute inset-0 bg-gradient-to-r from-green-500/20 to-blue-500/20 opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
         </Button>
       </motion.div>
     </section>

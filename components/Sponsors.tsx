@@ -3,7 +3,7 @@ import { motion } from "framer-motion";
 export default function ShortReviewWithLogoAndStars() {
   return (
     <>
-      <div className="bg-white text-black">
+      <div className="bg-white text-black h-[80vh]">
         <h3 className="scroll-m-20 text-4xl font-light tracking-tight lg:text-5xl text-center pt-20">
           Our partners
         </h3>

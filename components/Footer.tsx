@@ -1,6 +1,7 @@
 "use client"; 
 import { Footer, FooterColumn, FooterBottom, FooterContent } from "./ui/footer";
-// Removed import of motion
+import Image from 'next/image'; // Import Next.js Image component
+import Link from 'next/link'; // Import Next.js Link component
 
 export default function FooterSection() {
   return (
@@ -10,8 +11,8 @@ export default function FooterSection() {
           <FooterContent>
             <FooterColumn className="col-span-2 sm:col-span-3 md:col-span-1">
               <div className="flex items-center gap-2">
-                <img
-                  src="./artboardw.png"
+                <Image
+                  src="/artboardw.png" // Use absolute path for Next.js
                   alt="mockup"
                   width={150}
                   height={150}
@@ -20,43 +21,43 @@ export default function FooterSection() {
             </FooterColumn>
             <FooterColumn>
               <h3 className="text-md pt-1 font-semibold text-white">Product</h3>
-              <a href="/" className="text-sm text-white">
+              <Link href="/" className="text-sm text-white">
                 Changelog
-              </a>
-              <a href="/" className="text-sm text-white">
+              </Link>
+              <Link href="/" className="text-sm text-white">
                 Documentation
-              </a>
+              </Link>
             </FooterColumn>
             <FooterColumn>
               <h3 className="text-md pt-1 font-semibold text-white">Company</h3>
-              <a href="/" className="text-sm text-white">
+              <Link href="/" className="text-sm text-white">
                 About
-              </a>
-              <a href="/" className="text-sm text-white">
+              </Link>
+              <Link href="/" className="text-sm text-white">
                 Careers
-              </a>
-              <a href="/" className="text-sm text-white">
+              </Link>
+              <Link href="/" className="text-sm text-white">
                 Blog
-              </a>
+              </Link>
             </FooterColumn>
             <FooterColumn>
               <h3 className="text-md pt-1 font-semibold text-white">Contact</h3>
-              <a href="/" className="text-sm text-white">
+              <Link href="/" className="text-sm text-white">
                 Discord
-              </a>
-              <a href="/" className="text-sm text-white">
+              </Link>
+              <Link href="/" className="text-sm text-white">
                 Twitter
-              </a>
-              <a href="/" className="text-sm text-white">
+              </Link>
+              <Link href="/" className="text-sm text-white">
                 Github
-              </a>
+              </Link>
             </FooterColumn>
           </FooterContent>
           <FooterBottom>
             <div>© 2025 potentia. All rights reserved</div>
             <div className="flex items-center gap-4">
-              <a href="/">Privacy Policy</a>
-              <a href="/">Terms of Service</a>
+              <Link href="/">Privacy Policy</Link>
+              <Link href="/">Terms of Service</Link>
             </div>
           </FooterBottom>
         </Footer>

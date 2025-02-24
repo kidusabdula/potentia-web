@@ -1,4 +1,3 @@
-// components/TopBar.tsx
 "use client";
 import React, { useEffect, useState, useRef } from "react";
 
@@ -31,7 +30,7 @@ const TopBar: React.FC = () => {
     };
 
     fetchMarketData();
-    const interval = setInterval(fetchMarketData, 30000);
+    const interval = setInterval(fetchMarketData, 30000); // Updates every 30s
     return () => clearInterval(interval);
   }, []);
 
@@ -76,7 +75,7 @@ const TopBar: React.FC = () => {
   ];
 
   return (
-    <div className="fixed top-0 left-0 w-full h-12 bg-[#010101] text-white border-b border-gray-900 overflow-hidden z-40">
+    <div className="relative w-full h-12 bg-[#010101] text-white border-b border-gray-900 overflow-hidden z-10">
       <style jsx>{`
         @keyframes ticker {
           0% {

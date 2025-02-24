@@ -1,4 +1,3 @@
-// components/Header.tsx
 "use client";
 import { useState, useEffect } from "react";
 import Link from "next/link";
@@ -7,45 +6,61 @@ import WhiteLogo from "@/public/Logos/Artboardw.png";
 import BlackLogo from "@/public/Logos/Artboardb.png";
 import { motion, useAnimation } from "framer-motion";
 
-const Header = () => {
+interface HeaderProps {
+  isSticky?: boolean; // Optional prop, defaults to true
+}
+
+const Header = ({ isSticky = true }: HeaderProps) => {
   const [menuOpen, setMenuOpen] = useState(false);
   const [dropdownOpen, setDropdownOpen] = useState(false);
-  const [scrolled, setScrolled] = useState(false);
+  const [scrolledPastTopBar, setScrolledPastTopBar] = useState(false);
   const controls = useAnimation();
 
   useEffect(() => {
     const handleScroll = () => {
-      if (window.scrollY > 50) {
-        setScrolled(true);
+      const topBarHeight = 48; // Matches TopBar's h-12 (12 * 4px = 48px)
+      const scrollY = window.scrollY;
+
+      if (scrollY > topBarHeight) {
+        setScrolledPastTopBar(true);
       } else {
-        setScrolled(false);
+        setScrolledPastTopBar(false);
+      }
+
+      if (scrollY > 50) {
+        controls.start({
+          opacity: 1,
+          y: 0,
+          transition: { duration: 0.5, ease: "easeInOut" },
+        });
+      } else {
+        controls.start({
+          opacity: 1,
+          y: 0,
+          transition: { duration: 0.5, ease: "easeInOut" },
+        });
       }
     };
 
     window.addEventListener("scroll", handleScroll);
-    return () => {
-      window.removeEventListener("scroll", handleScroll);
-    };
-  }, []);
+    return () => window.removeEventListener("scroll", handleScroll);
+  }, [controls]);
 
-  useEffect(() => {
-    if (scrolled) {
-      controls.start({ opacity: 20, y: 0, transition: { duration: 0.5, ease: "easeInOut" } });
-    } else {
-      controls.start({ opacity: 1, y: 0, transition: { duration: 0.5, ease: "easeInOut" } });
-    }
-  }, [scrolled, controls]);
-
-  const headerClassName = `fixed top-12 w-full z-30 transition-all duration-100 ${
-    scrolled ? "bg-white shadow-md" : "bg-transparent"
+  // Dynamically set position based on isSticky prop
+  const headerClassName = `${
+    isSticky ? "fixed" : "relative"
+  } w-full z-30 transition-all duration-300 ${
+    scrolledPastTopBar && isSticky
+      ? "top-0 bg-white shadow-md"
+      : "top-12 bg-transparent"
   }`;
 
   const linkClassName = `block md:inline-block px-6 py-2 transition-colors duration-300 ${
-    scrolled ? "text-black" : "text-white"
+    scrolledPastTopBar && isSticky ? "text-black" : "text-white"
   } hover:text-gray-600`;
 
   return (
-    <motion.header className={headerClassName}>
+    <motion.header className={headerClassName} animate={controls}>
       <div className="max-w-7xl mx-auto px-6 py-4 flex justify-between items-center">
         {/* Left Navigation Links */}
         <div className="hidden md:flex space-x-8 items-center">
@@ -60,12 +75,12 @@ const Header = () => {
         {/* Logo in the Center */}
         <div className="absolute left-1/2 transform -translate-x-1/2">
           <motion.img
-            src={scrolled ? BlackLogo.src : WhiteLogo.src}
+            src={scrolledPastTopBar && isSticky ? BlackLogo.src : WhiteLogo.src}
             alt="Logo"
             width={120}
             height={40}
             className="transition-opacity duration-300"
-            animate={{ opacity: scrolled ? 1 : 1, y: scrolled ? 0 : 10 }}
+            animate={{ opacity: 1 }}
             transition={{ duration: 0.5, ease: "easeInOut" }}
           />
         </div>
@@ -100,7 +115,7 @@ const Header = () => {
               className={`${
                 dropdownOpen ? "block" : "hidden"
               } absolute left-0 top-full mt-2 ${
-                scrolled ? "bg-white" : "bg-transparent"
+                scrolledPastTopBar && isSticky ? "bg-white" : "bg-transparent"
               } text-black shadow-lg w-56 py-2 rounded-md z-40`}
             >
               <Link
@@ -121,7 +136,9 @@ const Header = () => {
 
         {/* Mobile Menu Button */}
         <button
-          className={`md:hidden ${scrolled ? "text-black" : "text-white"}`}
+          className={`md:hidden ${
+            scrolledPastTopBar && isSticky ? "text-black" : "text-white"
+          }`}
           onClick={() => setMenuOpen(!menuOpen)}
         >
           {menuOpen ? <X size={28} /> : <Menu size={28} />}
@@ -132,7 +149,7 @@ const Header = () => {
           className={`${
             menuOpen ? "block" : "hidden"
           } md:hidden absolute top-full left-0 w-full ${
-            scrolled ? "bg-transparent" : "bg-transparent"
+            scrolledPastTopBar && isSticky ? "bg-white" : "bg-transparent"
           } shadow-md z-40`}
         >
           <div className="flex flex-col items-center space-y-4 py-4">
@@ -142,8 +159,8 @@ const Header = () => {
             <Link href="/learn" className={linkClassName}>
               Learn
             </Link>
-            <Link href="/about-us" className={linkClassName}>
-              About Us
+            <Link href="/facilities" className={linkClassName}>
+              Facilities
             </Link>
             <Link href="/market-analysis" className={linkClassName}>
               Market Analysis

@@ -1,21 +1,22 @@
 "use client";
 
-import React from 'react'
+import React from "react";
 import { motion } from "framer-motion";
-import { Button } from "@/components/ui/button"; // Assuming ShadCN Button component
+import { Button } from "@/components/ui/button";
 import Head from "next/head";
-
 
 const Hero = () => {
   return (
-    <div className=''>
-         {/* Preload Video */}
-     <Head>
-        <link rel="preload" href="/videos/hero-bg.webm" as="video" type="video/webm" />
+    <div>
+      <Head>
+        <link
+          rel="preload"
+          href="/videos/hero-bg.webm"
+          as="video"
+          type="video/webm"
+        />
       </Head>
-
       <section className="relative h-screen w-full overflow-hidden">
-        {/* Video Background */}
         <video
           autoPlay
           muted
@@ -34,10 +35,10 @@ const Hero = () => {
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 1, ease: "easeOut" }}
-          className="my-16 relative z-10 flex h-full flex-col items-center justify-center text-center text-white"
+          className="relative z-10 flex h-full flex-col items-center justify-center text-center text-white px-4"
         >
           <h1 className="mb-6 text-5xl font-bold md:text-6xl font-sans">
-            Pioneering Digital Transformation
+           Build Today&apos;s Digital Transformation
           </h1>
           <p className="mb-8 max-w-2xl text-xl md:text-2xl font-sans">
             Empowering the future with high-performance computing, Bitcoin
@@ -61,11 +62,16 @@ const Hero = () => {
 
         {/* Scroll Indicator */}
         <motion.div
-          className="absolute bottom-8 left-1/2 -translate-x-1/2 text-white"
+          className="absolute bottom-28 left-0 right-0 flex justify-center text-white"
           animate={{ y: [0, 10, 0] }}
           transition={{ repeat: Infinity, duration: 1.5 }}
         >
-          <svg className="h-8 w-8" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <svg
+            className="h-8 w-8"
+            fill="none"
+            stroke="currentColor"
+            viewBox="0 0 24 24"
+          >
             <path
               strokeLinecap="round"
               strokeWidth="2"
@@ -78,7 +84,7 @@ const Hero = () => {
         <div className="absolute inset-0 bg-gradient-to-b from-zinc-900/50 to-zinc-800/80"></div>
       </section>
     </div>
-  )
-}
+  );
+};
 
-export default Hero
+export default Hero;

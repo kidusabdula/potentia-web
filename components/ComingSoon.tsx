@@ -1,11 +1,11 @@
-'use client';
+"use client";
 
-import { useState } from 'react';
-import { motion } from 'framer-motion';
-import Image from 'next/image';
+// import { useState } from "react";
+import { motion } from "framer-motion";
+import Image from "next/image";
 
 const ComingSoon = () => {
-  const [email, setEmail] = useState('');
+  // const [email, setEmail] = useState("");
 
   return (
     <div className="h-screen bg-black text-white text-center px-4 max-w[1400px] mx-auto">
@@ -13,7 +13,7 @@ const ComingSoon = () => {
         <Image
           src="/logo.jpg" // Path to the image
           alt="logo image"
-          layout='fill'// Adjusted height for responsiveness
+          layout="fill" // Adjusted height for responsiveness
         />
       </div>
       <motion.h1
@@ -24,16 +24,16 @@ const ComingSoon = () => {
       >
         Coming Soon
       </motion.h1>
-      
+
       <motion.p
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
         transition={{ duration: 1.5 }}
         className="text-lg mt-4 text-gray-200"
       >
-        We're working on something amazing. Stay tuned!
+        We&apos;re working on something amazing. Stay tuned!
       </motion.p>
-      
+
       <motion.p
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}

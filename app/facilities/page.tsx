@@ -1,5 +1,5 @@
 "use client";
-
+import React from "react";
 import MapboxMap from "@/components/3DMap";
 
 export default function Facilities() {
