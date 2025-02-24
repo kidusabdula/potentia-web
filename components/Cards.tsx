@@ -129,7 +129,7 @@ export default function Cards() {
               </CardHeader>
               <CardContent className="flex-grow p-6 pt-0">
                 <p className="text-base text-zinc-300 italic">
-                  "{card.quote}"
+                &quot;{card.quote}&quot;
                 </p>
               </CardContent>
               <CardFooter className="p-6 pt-0 flex justify-between items-center">
