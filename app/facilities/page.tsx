@@ -1,9 +1,11 @@
-import React from 'react'
+"use client";
 
-const page = () => {
+import MapboxMap from "@/components/3DMap";
+
+export default function Facilities() {
   return (
-    <div>page</div>
-  )
+    <div className="min-h-screen bg-zinc-900">
+      <MapboxMap />
+    </div>
+  );
 }
-
-export default page

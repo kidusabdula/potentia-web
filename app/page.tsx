@@ -1,8 +1,22 @@
+"use client";
+import Cards from "@/components/Cards";
+import Hero from "@/components/Hero";
+import IconSection from "@/components/IconSection";
+import MiningSolutions from "@/components/Solutions";
+import Sponsors from "@/components/Sponsors";
+import Team from "@/components/Team";
+
+
 export default function HomePage() {
   return (
-    <div className="flex min-h-screen flex-col items-center justify-center">
-      <h1 className="text-4xl font-bold">Welcome to Potentia</h1>
-      <p className="mt-4 text-lg">Your gateway to Bitcoin mining.</p>
-    </div>
+    <>
+     <Hero/>
+     <Sponsors/>
+     <MiningSolutions/>
+     <IconSection/>
+     <Team/>
+     <Cards/>
+
+    </>
   );
 }
