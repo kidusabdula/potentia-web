@@ -17,7 +17,7 @@ const cardData = [
       "I'm absolutely floored by the level of care and attention to detail the team at HS have put into this theme. I can guarantee I'll be a return customer.",
     name: "Nicole Grazioso",
     position: "Director Payments & Risk | HubSpot",
-    companyLogo: "/MiningPic.jpg", // Optional: Add company logo
+    companyLogo: "/artboardw.png", // Optional: Add company logo
     rating: 5,
   },
   {
@@ -26,7 +26,7 @@ const cardData = [
       "With Acme, we're able to easily track our performance in full detail. It's become an essential tool for us to grow and engage with our audience.",
     name: "Josh Tyson",
     position: "Product Manager | Capsule",
-    companyLogo: "/MiningPic.jpg",
+    companyLogo: "/artboardw.png",
     rating: 4,
   },
   {
@@ -35,7 +35,7 @@ const cardData = [
       "After two years with this theme through multiple updates, I'm impressed by the consistency and effort. It's a game-changer for our operations.",
     name: "Luisa Martinez",
     position: "Senior Director of Operations | Fitbit",
-    companyLogo: "/MiningPic.jpg",
+    companyLogo: "/artboardw.png",
     rating: 5,
   },
   {
@@ -44,7 +44,7 @@ const cardData = [
       "The integration of advanced analytics and seamless design has transformed how we approach our projects. Truly exceptional work!",
     name: "Evan Patel",
     position: "CTO | Nebula Labs",
-    companyLogo: "/MiningPic.jpg",
+    companyLogo: "/artboardw.png",
     rating: 5,
   },
 ];
