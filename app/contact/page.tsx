@@ -186,7 +186,7 @@ const ContactUs: React.FC = () => {
                 <strong>Hours:</strong> Monday–Friday, 9 AM–6 PM (UTC-5)
               </p>
             </div>
-            <div className="bg-zinc-900 rounded-xl p-2 md:p-4 shadow-lg border border-zinc-800 h-64">
+            {/* <div className="bg-zinc-900 rounded-xl p-2 md:p-4 shadow-lg border border-zinc-800 h-64">
               <MapContainer
                 center={[32.7767, -96.7970]} // Dallas, TX coordinates
                 zoom={13}
@@ -199,7 +199,7 @@ const ContactUs: React.FC = () => {
                 />
                 <Marker position={[32.7767, -96.7970]} />
               </MapContainer>
-            </div>
+            </div> */}
           </motion.div>
         </div>
       </motion.div>

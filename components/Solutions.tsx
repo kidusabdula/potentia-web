@@ -61,7 +61,7 @@ const MiningSolutions: React.FC = () => {
           animate="visible"
         >
           <h1 className="text-4xl md:text-5xl font-bold text-white font-sans mb-4">
-            Potentia Mining Solutions
+            potentia Mining Solutions
           </h1>
           <p className="text-lg md:text-xl text-zinc-300 max-w-2xl mx-auto">
             Empowering the future of digital mining with cutting-edge technology, sustainable energy, and global impact.
