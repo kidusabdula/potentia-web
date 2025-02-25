@@ -15,8 +15,8 @@ import {
   MapPin,
   Award,
 } from "lucide-react";
-
-// Expanded features array with more detail
+import Link from "next/link";
+import { Button } from "@/components/ui/button";
 const features = [
   {
     title: "Bitcoin Mining Operations",
@@ -119,9 +119,6 @@ const About = () => {
           animate={{ opacity: 1, scale: 1 }}
           transition={{ duration: 0.6, delay: 0.4 }}
         >
-          {/* <button className="px-8 py-3 bg-zinc-800/50 border border-zinc-700 text-white rounded-full hover:bg-zinc-700/50 transition-all duration-300">
-            Explore Our Story
-          </button> */}
         </motion.div>
       </motion.section>
       {/* Mission & Vision */}
@@ -270,64 +267,6 @@ const About = () => {
           </div>
         </div>
       </motion.section>
-      {/* Team Section */}
-      {/* <motion.section
-        className="py-20 px-6 bg-zinc-900"
-        variants={staggerChildren}
-        initial="hidden"
-        whileInView="visible"
-        viewport={{ once: true }}
-      >
-        <div className="max-w-6xl mx-auto text-center">
-          <motion.h2
-            className="text-3xl md:text-4xl font-bold mb-12"
-            variants={fadeInUp}
-          >
-            Our Team
-          </motion.h2>
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
-            {[
-              {
-                name: "Robert Luft",
-                role: "CEO & Founder",
-                img: "/person1.jpg",
-              },
-              { name: "John Chain", role: "CTO", img: "/person2.jpg" },
-              { name: "John Appleseed", role: "COO", img: "/person3.jpg" },
-            ].map((member, index) => (
-              <motion.div
-                key={index}
-                variants={fadeInUp}
-                whileHover="hover"
-                className="bg-zinc-800/50 p-6 rounded-lg shadow-lg flex flex-col items-center"
-              >
-                <div className="w-48 h-48 mb-4 overflow-hidden rounded-full">
-                  <Image
-                    src={member.img}
-                    alt={member.name}
-                    width={192} // Consistent width in pixels (w-48 = 12rem = 192px at default scaling)
-                    height={192} // Consistent height in pixels
-                    className="object-cover w-full h-full"
-                  />
-                </div>
-                <h3 className="text-lg font-semibold text-white">
-                  {member.name}
-                </h3>
-                <p className="text-zinc-300 text-sm">{member.role}</p>
-              </motion.div>
-            ))}
-          </div>
-          <motion.p
-            className="mt-12 text-zinc-300 max-w-2xl mx-auto"
-            variants={fadeInUp}
-          >
-            Our leadership team brings decades of expertise in blockchain,
-            energy, and technology innovation, driving Potentia&apos;s global
-            success.
-          </motion.p>
-        </div>
-      </motion.section> */}
-      {/* Global Impact */}{" "}
       <motion.section
         className="py-14 px-6 bg-white text-black"
         variants={staggerChildren}
@@ -335,7 +274,7 @@ const About = () => {
         whileInView="visible"
         viewport={{ once: true }}
       >
-        <div className="max-w-6xl mx-auto">
+        <div className="max-w-6xl mx-auto"></div>
           <motion.h2
             className="text-3xl md:text-4xl font-bold text-center mb-12"
             variants={fadeInUp}
@@ -380,54 +319,6 @@ const About = () => {
                 standard for sustainability in the blockchain industry.
               </p>
             </motion.div>
-            {/* <motion.div variants={fadeInUp}>
-              <h3 className="text-2xl font-semibold mb-4">
-                Technological Advancement
-              </h3>
-              <p className="text-zinc-700 mb-4">
-                Potentia drives the future of high-performance computing (HPC)
-                by repurposing mining hardware for scientific research and AI
-                development. Our facilities have supported breakthroughs in
-                climate modeling and medical simulations, processing over 10
-                petabytes of data for global research institutions in 2024.
-              </p>
-              <p className="text-zinc-700">
-                Through open-source collaborations, we&apos;ve released tools
-                like the &quot;Potentia Compute Framework,&quot; enabling
-                developers worldwide to harness our infrastructure for
-                decentralized computing projects, democratizing access to
-                powerful technology.
-              </p>
-            </motion.div>
-            <motion.div variants={fadeInUp}>
-              <h3 className="text-2xl font-semibold mb-4">
-                Community Empowerment
-              </h3>
-              <p className="text-zinc-700 mb-4">
-                Beyond profits, Potentia invests in the communities where we
-                operate. Our &quot;Miners for Education&quot; program has funded
-                STEM scholarships for over 5,000 students in underserved
-                regions, while our energy surplus sharing has provided free
-                electricity to rural schools and clinics.
-              </p>
-              <p className="text-zinc-700">
-                In partnership with local governments, we&apos;ve launched
-                blockchain literacy campaigns, training over 50,000 individuals
-                in 2024 alone to participate in the digital economy, fostering
-                financial inclusion and technological empowerment on a global
-                scale.
-              </p>
-            </motion.div> */}
-          </div>
-          {/* Summary Stats */}
-          {/* <motion.div className="mt-12 text-center" variants={fadeInUp}>
-            <p className="text-zinc-700 text-lg italic">
-              From economic vitality to environmental stewardship,
-              Potentia&apos;s impact spans continents, with 530 MW of mining
-              power, 200,000+ supported businesses, and a vision for a
-              decentralized, sustainable future.
-            </p>
-          </motion.div> */}
         </div>
       </motion.section>
       {/* CTA */}
@@ -445,13 +336,15 @@ const About = () => {
           Ready to explore how Potentia can transform your business with
           innovative mining and HPC solutions? Let&apos;s connect.
         </p>
-        <motion.button
-          className="px-8 py-3 bg-zinc-800/50 border border-zinc-700 text-white rounded-full hover:bg-zinc-700/50 transition-all duration-300"
-          whileHover={{ scale: 1.05 }}
-          whileTap={{ scale: 0.95 }}
-        >
-          Contact Us
-        </motion.button>
+        <Link href="/contact" passHref>
+            <Button
+              variant="default"
+              size="lg"
+              className="px-8 py-3 bg-zinc-800/50 border border-zinc-700 text-white rounded-full hover:bg-zinc-700/50 transition-all duration-300"            
+            >
+              Contact Us
+            </Button>
+        </Link>
       </motion.section>
     </div>
   );

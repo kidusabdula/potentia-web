@@ -1,11 +1,8 @@
 "use client";
-
 import React from "react";
 import { motion } from "framer-motion";
 import { Button } from "@/components/ui/button";
-import Link from 'next/link';
-
-const posterImage = "/HeroSectionPoster.png";
+import Link from "next/link";
 
 const Hero = () => {
   const overlayVariants = {
@@ -18,27 +15,16 @@ const Hero = () => {
   };
 
   return (
-    <section className="relative h-screen w-full overflow-hidden">
-      <video
-        autoPlay
-        muted
-        loop
-        playsInline
-        poster={posterImage}
-        className="absolute inset-0 h-full w-full object-cover opacity-40"
-        preload="auto"
-      >
-        <source src="/videos/HeroSectionVideoGIF.webm" type="video/webm" />
-        <source src="/videos/HeroSectionVideoGIF.mp4" type="video/mp4" />
-        {/* Fallback text is automatically handled by browser */}
-      </video>
+    <section className="relative h-screen w-full overflow-hidden bg-gradient-to-b from-zinc-700/80 via-black/90 to-zinc-900 pt-40">
+      {/* Gradient Background (No Images or Videos) */}
+      <div className="absolute inset-0 pointer-events-none" />
 
       {/* Overlay Content with Animation */}
       <motion.div
         variants={overlayVariants}
         initial="hidden"
         animate="visible"
-        className="relative z-10 flex my-10 h-full flex-col items-center justify-center text-center text-white px-4 sm:px-6"
+        className="relative z-10 flex h-full flex-col items-center justify-center text-center text-white px-4 sm:px-6"
       >
         <h1 className="mb-6 text-4xl font-bold font-sans sm:text-5xl md:text-6xl">
           Build Today&apos;s Digital Transformation
@@ -50,12 +36,12 @@ const Hero = () => {
         <div>
           <Link href="/about" passHref>
             <Button
-              variant="ghost"
+              variant="default"
               size="lg"
               aria-label="Get Started with our services"
               className="group"
             >
-              About potentia
+              About Potentia
               <svg
                 className="ml-2 h-5 w-5 inline-block transition-transform group-hover:translate-x-1"
                 fill="none"
@@ -69,9 +55,6 @@ const Hero = () => {
           </Link>
         </div>
       </motion.div>
-
-      {/* Fallback Gradient */}
-      <div className="absolute inset-0 bg-gradient-to-b from-zinc-900/50 to-zinc-800/80 pointer-events-none" />
     </section>
   );
 };

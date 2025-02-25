@@ -4,16 +4,15 @@ import dynamic from "next/dynamic";
 import { useNavbar } from "@/context/NavBarContext";
 import { useEffect } from "react";
 
-// Dynamically import MapboxMap (FlatMap3D) with SSR disabled
 const FlatMap3D = dynamic(() => import("@/components/FlatMap3D"), {
-  ssr: false, // Ensures it only runs on the client
+  ssr: false, 
 });
 
 export default function Facilities() {
   const { setSticky } = useNavbar();
   useEffect(() => {
     setSticky(false);
-    return () => setSticky(true); // Reset on unmount
+    return () => setSticky(true); 
   }, [setSticky]);
 
   return (

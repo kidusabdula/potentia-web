@@ -1,7 +1,7 @@
 "use client";
 import React from "react";
 import { motion } from "framer-motion";
-import { Button } from "@/components/ui/button"; // Assuming ShadCN Button component
+import { Button } from "@/components/ui/button"; 
 import Image from "next/image";
 
 const bitcoinPickaxeImage = "/bitcoin-pickaxe.png"; 

@@ -12,7 +12,6 @@ const fadeUpVariant = {
   visible: { opacity: 1, y: 0, transition: { duration: 0.5, ease: "easeOut" } },
 };
 
-// Change the function name to AboutComponent
 export default function AboutComponent() {
   return (
     <motion.div

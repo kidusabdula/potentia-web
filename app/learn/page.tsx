@@ -562,7 +562,7 @@ const Learn = () => {
         transition={{ duration: 0.8, ease: "easeOut" }}
         viewport={{ once: true }}
       >
-        <p className="text-xl md:text-2xl text-zinc-300 mb-8 leading-relaxed">
+        {/* <p className="text-xl md:text-2xl text-zinc-300 mb-8 leading-relaxed">
           Ready to harness Bitcoin mining&apos;s power with Potentia&apos;s
           cutting-edge solutions?
         </p>
@@ -573,7 +573,7 @@ const Learn = () => {
         >
           <span className="relative z-10">Get Started `{"->"}` </span>
           <span className="absolute inset-0 bg-gradient-to-r from-green-500/20 to-blue-500/20 opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
-        </Button>
+        </Button> */}
       </motion.div>
     </section>
   );

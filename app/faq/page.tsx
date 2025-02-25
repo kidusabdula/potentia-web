@@ -2,6 +2,7 @@
 import React, { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { Button } from "@/components/ui/button";
+import Link from "next/link";
 
 const FAQPage = () => {
   const [openSection, setOpenSection] = useState<number | null>(null);
@@ -306,14 +307,16 @@ const FAQPage = () => {
         <p className="text-xl md:text-2xl text-zinc-300 mb-8 leading-relaxed">
           Have more questions or ready to join Potentia’s mission? Reach out today.
         </p>
-        <Button
-          variant="default"
-          size="lg"
-          className="group relative overflow-hidden"
-        >
-          <span className="relative z-10">Contact Us</span>
-          <span className="absolute inset-0 bg-gradient-to-r from-green-500/20 to-blue-500/20 opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
-        </Button>
+        <Link href="/contact" passHref>
+            <Button
+              variant="default"
+              size="lg"
+              className="group relative overflow-hidden"
+            >
+              <span className="relative z-10">Contact Us</span>
+              <span className="absolute inset-0 bg-gradient-to-r from-green-500/20 to-blue-500/20 opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
+            </Button>
+        </Link>
       </motion.div>
     </section>
   );
