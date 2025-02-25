@@ -1,94 +1,74 @@
 "use client";
-import { useState, useEffect } from "react";
+import { useEffect, useState } from "react";
 import Link from "next/link";
 import { Menu, X } from "lucide-react";
-import WhiteLogo from "@/public/Logos/Artboardw.png";
-import BlackLogo from "@/public/Logos/Artboardb.png";
-import { motion, useAnimation } from "framer-motion";
+import { motion } from "framer-motion";
+import { useNavbar } from "@/context/NavBarContext";
 
-interface HeaderProps {
-  isSticky?: boolean; // Optional prop, defaults to true
-}
-
-const Header = ({ isSticky = true }: HeaderProps) => {
+const Header = () => {
   const [menuOpen, setMenuOpen] = useState(false);
   const [dropdownOpen, setDropdownOpen] = useState(false);
-  const [scrolledPastTopBar, setScrolledPastTopBar] = useState(false);
-  const controls = useAnimation();
+  const [scrolled, setScrolled] = useState(false);
+  const { sticky } = useNavbar();
 
   useEffect(() => {
     const handleScroll = () => {
-      const topBarHeight = 48; // Matches TopBar's h-12 (12 * 4px = 48px)
-      const scrollY = window.scrollY;
-
-      if (scrollY > topBarHeight) {
-        setScrolledPastTopBar(true);
-      } else {
-        setScrolledPastTopBar(false);
-      }
-
-      if (scrollY > 50) {
-        controls.start({
-          opacity: 1,
-          y: 0,
-          transition: { duration: 0.5, ease: "easeInOut" },
-        });
-      } else {
-        controls.start({
-          opacity: 1,
-          y: 0,
-          transition: { duration: 0.5, ease: "easeInOut" },
-        });
-      }
+      setScrolled(window.scrollY > 50);
     };
-
     window.addEventListener("scroll", handleScroll);
     return () => window.removeEventListener("scroll", handleScroll);
-  }, [controls]);
+  }, []);
 
-  // Dynamically set position based on isSticky prop
   const headerClassName = `${
-    isSticky ? "fixed" : "relative"
-  } w-full z-30 transition-all duration-300 ${
-    scrolledPastTopBar && isSticky
-      ? "top-0 bg-white shadow-md"
-      : "top-12 bg-transparent"
+    sticky ? "fixed top-0 w-full z-30" : "relative"
+  } transition-all duration-300 ${
+    scrolled ? "bg-white shadow-md" : "bg-transparent"
   }`;
 
-  const linkClassName = `block md:inline-block px-6 py-2 transition-colors duration-300 ${
-    scrolledPastTopBar && isSticky ? "text-black" : "text-white"
-  } hover:text-gray-600`;
+  const linkClassName = `block px-6 py-2 transition-colors duration-300 ${
+    scrolled ? "text-black" : "text-white"
+  } hover:text-gray-300`;
+
+  const mobileLinkClassName = `block px-6 py-3 text-white transition-colors duration-300 hover:text-gray-300`;
 
   return (
-    <motion.header className={headerClassName} animate={controls}>
-      <div className="max-w-7xl mx-auto px-6 py-4 flex justify-between items-center">
+    <motion.header className={headerClassName}>
+      <div className="max-w-7xl mx-auto px-6 py-4 flex justify-between items-center relative">
         {/* Left Navigation Links */}
         <div className="hidden md:flex space-x-8 items-center">
           <Link href="/" className={`${linkClassName} font-bold`}>
             Home
           </Link>
-          <Link href="/learning" className={linkClassName}>
-            Learn
+          <Link href="/facilities" className={linkClassName}>
+            Facilities
           </Link>
         </div>
 
         {/* Logo in the Center */}
         <div className="absolute left-1/2 transform -translate-x-1/2">
           <motion.img
-            src={scrolledPastTopBar && isSticky ? BlackLogo.src : WhiteLogo.src}
+            src={scrolled ? "/Artboardb.png" : "/Artboardw.png"}
             alt="Logo"
-            width={120}
+            width={90}
             height={40}
             className="transition-opacity duration-300"
-            animate={{ opacity: 1 }}
-            transition={{ duration: 0.5, ease: "easeInOut" }}
+            animate={{
+              opacity: 1,
+              y: scrolled ? 0 : 10,
+              scale: scrolled ? 1 : 2.5,
+            }}
+            transition={{
+              scale: { duration: 0.3, ease: "easeOut" },
+              duration: 0.3,
+              ease: "easeInOut",
+            }}
           />
         </div>
 
         {/* Right Navigation Links */}
         <div className="hidden md:flex space-x-8 items-center">
-          <Link href="/facilities" className={linkClassName}>
-            Facilities
+          <Link href="/about" className={linkClassName}>
+            About
           </Link>
           <div className="relative">
             <button
@@ -111,66 +91,99 @@ const Header = ({ isSticky = true }: HeaderProps) => {
                 />
               </svg>
             </button>
-            <div
-              className={`${
-                dropdownOpen ? "block" : "hidden"
-              } absolute left-0 top-full mt-2 ${
-                scrolledPastTopBar && isSticky ? "bg-white" : "bg-transparent"
-              } text-black shadow-lg w-56 py-2 rounded-md z-40`}
-            >
-              <Link
-                href="/market-analysis"
-                className={`${linkClassName} hover:bg-gray-100 block`}
+            {dropdownOpen && (
+              <motion.div
+                className={`absolute left-0 top-full mt-2 ${
+                  scrolled ? "bg-white" : "bg-transparent"
+                } text-black shadow-lg w-56 py-2 rounded-md z-40`}
+                initial={{ opacity: 0, y: -10 }}
+                animate={{ opacity: 1, y: 0 }}
+                exit={{ opacity: 0, y: -10 }}
+                transition={{ duration: 0.2 }}
               >
-                Market Analysis
-              </Link>
-              <Link
-                href="/faqs"
-                className={`${linkClassName} hover:bg-gray-100 block`}
-              >
-                FAQs
-              </Link>
-            </div>
+                <Link
+                  href="/learn"
+                  className={`${linkClassName} hover:bg-gray-100 block`}
+                >
+                  Learn
+                </Link>
+                <Link
+                  href="/faq"
+                  className={`${linkClassName} hover:bg-gray-100 block`}
+                >
+                  FAQs
+                </Link>
+              </motion.div>
+            )}
           </div>
         </div>
 
         {/* Mobile Menu Button */}
         <button
-          className={`md:hidden ${
-            scrolledPastTopBar && isSticky ? "text-black" : "text-white"
-          }`}
+          className={`md:hidden z-50 ${scrolled ? "text-black" : "text-white"}`}
           onClick={() => setMenuOpen(!menuOpen)}
         >
           {menuOpen ? <X size={28} /> : <Menu size={28} />}
         </button>
-
-        {/* Mobile Navigation Links */}
-        <nav
-          className={`${
-            menuOpen ? "block" : "hidden"
-          } md:hidden absolute top-full left-0 w-full ${
-            scrolledPastTopBar && isSticky ? "bg-white" : "bg-transparent"
-          } shadow-md z-40`}
-        >
-          <div className="flex flex-col items-center space-y-4 py-4">
-            <Link href="/" className={linkClassName}>
-              Home
-            </Link>
-            <Link href="/learn" className={linkClassName}>
-              Learn
-            </Link>
-            <Link href="/facilities" className={linkClassName}>
-              Facilities
-            </Link>
-            <Link href="/market-analysis" className={linkClassName}>
-              Market Analysis
-            </Link>
-            <Link href="/faqs" className={linkClassName}>
-              FAQs
-            </Link>
-          </div>
-        </nav>
       </div>
+
+      {/* Mobile Navigation Links */}
+      <motion.nav
+        className="md:hidden fixed top-0 right-0 h-full w-3/4 max-w-xs bg-black text-white shadow-lg z-40"
+        initial={{ x: "100%" }}
+        animate={{ x: menuOpen ? 0 : "100%" }}
+        transition={{ duration: 0.4, ease: "easeInOut" }}
+      >
+        <div className="flex flex-col items-start pt-20 px-6 space-y-6">
+          <Link
+            href="/"
+            className={mobileLinkClassName}
+            onClick={() => setMenuOpen(false)}
+          >
+            Home
+          </Link>
+          <Link
+            href="/about"
+            className={mobileLinkClassName}
+            onClick={() => setMenuOpen(false)}
+          >
+            About Us
+          </Link>
+          <Link
+            href="/facilities"
+            className={mobileLinkClassName}
+            onClick={() => setMenuOpen(false)}
+          >
+            Facilities
+          </Link>
+          <Link
+            href="/learn"
+            className={mobileLinkClassName}
+            onClick={() => setMenuOpen(false)}
+          >
+            Learn
+          </Link>
+          <Link
+            href="/faq"
+            className={mobileLinkClassName}
+            onClick={() => setMenuOpen(false)}
+          >
+            FAQs
+          </Link>
+        </div>
+      </motion.nav>
+
+      {/* Overlay for Mobile Menu */}
+      {menuOpen && (
+        <motion.div
+          className="md:hidden fixed inset-0 bg-black/50 z-30"
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          exit={{ opacity: 0 }}
+          transition={{ duration: 0.3 }}
+          onClick={() => setMenuOpen(false)}
+        />
+      )}
     </motion.header>
   );
 };

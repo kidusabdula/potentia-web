@@ -1,12 +1,12 @@
 import type { Metadata } from "next";
 import "../styles/globals.css";
 import Navbar from "@/components/NavBar";
-import TopBar from "@/components/TopBar";
 import "@fontsource/inter/400.css";
 import "@fontsource/inter/500.css";
 import "@fontsource/inter/600.css";
 import "@fontsource/inter/700.css";
 import FooterSection from "@/components/Footer";
+import { NavbarProvider } from "@/context/NavBarContext";
 
 export const metadata: Metadata = {
   title: "Potentia",
@@ -19,10 +19,11 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body className="bg-black text-white">
-        <TopBar />
-        <Navbar />
-        <main>{children}</main>
-        <FooterSection />
+        <NavbarProvider>
+          <Navbar />
+          <main>{children}</main>
+          <FooterSection />
+        </NavbarProvider>
       </body>
     </html>
   );
