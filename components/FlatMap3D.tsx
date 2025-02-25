@@ -143,7 +143,7 @@ const MapboxMap: React.FC = () => {
   };
 
   return (
-    <div className="flex flex-col md:flex-row min-h-screen bg-black text-white pt-40">
+    <div className="flex flex-col md:flex-row min-h-screen bg-black text-white pt-12">
       {/* Left Side: Summary */}
       <div className="md:w-1/4 p-6 md:border-r border-b md:border-b-0 border-gray-800 overflow-y-auto bg-black order-2 md:order-1 hidden lg:block">
         <h2 className="text-2xl font-bold mb-6 text-white">Global Mining Data</h2>
