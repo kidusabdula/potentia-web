@@ -329,7 +329,7 @@ const About = () => {
       </motion.section> */}
       {/* Global Impact */}{" "}
       <motion.section
-        className=" h-[150vh] py-14 px-6 bg-white text-black"
+        className="py-14 px-6 bg-white text-black"
         variants={staggerChildren}
         initial="hidden"
         whileInView="visible"
