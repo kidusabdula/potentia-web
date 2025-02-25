@@ -420,14 +420,14 @@ const About = () => {
             </motion.div> */}
           </div>
           {/* Summary Stats */}
-          <motion.div className="mt-12 text-center" variants={fadeInUp}>
+          {/* <motion.div className="mt-12 text-center" variants={fadeInUp}>
             <p className="text-zinc-700 text-lg italic">
               From economic vitality to environmental stewardship,
               Potentia&apos;s impact spans continents, with 530 MW of mining
               power, 200,000+ supported businesses, and a vision for a
               decentralized, sustainable future.
             </p>
-          </motion.div>
+          </motion.div> */}
         </div>
       </motion.section>
       {/* CTA */}
