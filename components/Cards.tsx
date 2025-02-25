@@ -13,19 +13,19 @@ import {
 
 const cardData = [
     {
-        image: "/artboardw.png", // Replace with your image path
+        image: "/Artboardw.png", // Replace with your image path
         quote: "I'm absolutely floored by the level of care and attention to detail the team at HS have put into this theme and for one can guarantee that I will be a return customer.",
         name: "Nicole Grazioso",
         position: "Director Payments & Risk | HubSpot"
     },
     {
-        image: "/artboardw.png", // Replace with your image path
+        image: "/Artboardw.png", // Replace with your image path
         quote: "With Acme, we're able to easily track our performance in full detail. It's become an essential tool for us to grow and engage with our audience.",
         name: "Josh Tyson",
         position: "Product Manager | Capsule"
     },
     {
-        image: "/artboardw.png", // Replace with your image path
+        image: "/Artboardw.png", // Replace with your image path
         quote: "In September, I will be using this theme for 2 years. I through multiple updates and changes and I'm very glad to see the consistency and effort made by the team.",
         name: "Luisa",
         position: "Senior Director of Operations | Fitbit"
