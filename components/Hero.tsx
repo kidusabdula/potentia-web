@@ -15,9 +15,15 @@ const Hero = () => {
   };
 
   return (
-    <section className="relative h-screen w-full overflow-hidden bg-gradient-to-b from-zinc-700/80 via-black/90 to-zinc-900 pt-40">
-      {/* Gradient Background (No Images or Videos) */}
-      <div className="absolute inset-0 pointer-events-none" />
+    <section className="relative h-screen w-full overflow-hidden pt-40">
+      {/* Custom Gradient Background */}
+      <div
+        aria-hidden="true"
+        className="flex absolute -top-96 start-1/2 transform -translate-x-1/2"
+      >
+        <div className="bg-gradient-to-r from-black/50 via-white/60 to-black/70 blur-[8rem] w-[25rem] h-[44rem] rotate-[-60deg] transform -translate-x-[10rem]" />
+        <div className="bg-gradient-to-tl from-black/70 via-white/15 to-black/50 blur-[8rem] w-[90rem] h-[50rem] rounded-full origin-top-left -rotate-12 -translate-x-[15rem]" />
+      </div>
 
       {/* Overlay Content with Animation */}
       <motion.div
@@ -36,7 +42,7 @@ const Hero = () => {
         <div>
           <Link href="/about" passHref>
             <Button
-              variant="default"
+              variant="ghost"
               size="lg"
               aria-label="Get Started with our services"
               className="group"
