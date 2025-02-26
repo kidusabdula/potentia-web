@@ -2,7 +2,6 @@
 import React, { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { Button } from "@/components/ui/button";
-import { Link } from "lucide-react";
 
 const Learn = () => {
   const [openSection, setOpenSection] = useState<number | null>(null);
