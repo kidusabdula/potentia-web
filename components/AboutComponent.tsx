@@ -1,4 +1,4 @@
-"use client"
+"use client";
 import { motion } from "framer-motion";
 import {
   BookOpenIcon,
@@ -6,6 +6,7 @@ import {
   MessagesSquareIcon,
   ThumbsUpIcon,
 } from "lucide-react";
+import Link from "next/link";
 
 const fadeUpVariant = {
   hidden: { opacity: 0, y: 40 },
@@ -20,39 +21,61 @@ export default function AboutComponent() {
       viewport={{ once: false, amount: 0.2 }}
       className="w-full py-24 lg:py-32 p-20 bg-white text-black"
     >
-      <motion.div className="grid md:grid-cols-2 gap-12" variants={fadeUpVariant}>
+      <motion.div
+        className="grid md:grid-cols-2 gap-12"
+        variants={fadeUpVariant}
+      >
         <motion.div className="lg:w-3/4" variants={fadeUpVariant}>
           <h2 className="scroll-m-20 border-b pb-2 text-3xl font-semibold tracking-tight transition-colors first:mt-0">
-            About us
+            Mission
           </h2>
           <p className="mt-3 text-muted-foreground">
-            We help businesses bring ideas to life in the digital world, by
-            designing and implementing the technology tools that they need to
-            win.
+            Leverage Bitcoin Mining as a catalsyt for economics empowerment,
+            infrastructure growth and energy innovation on a global scale.
           </p>
           <p className="mt-5">
-            <a
+            <Link
+              href="/about"
               className="inline-flex items-center gap-x-1 group font-medium hover:underline underline-offset-4"
-              href="#"
             >
               Read More
               <ChevronRightIcon className="flex-shrink-0 w-4 h-4 transition ease-in-out group-hover:translate-x-1" />
-            </a>
+            </Link>
           </p>
         </motion.div>
 
         <div className="space-y-6 lg:space-y-10">
-          {[  
-            { icon: <BookOpenIcon className="w-5 h-5" />, title: "Industry-leading documentation", desc: "Our documentation and extensive Client libraries contain everything a business needs to build a custom integration in a fraction of the time." },
-            { icon: <MessagesSquareIcon className="w-5 h-5" />, title: "Developer community support", desc: "We actively contribute to open-source projects—giving back to the community through development, patches, and sponsorships." },
-            { icon: <ThumbsUpIcon className="w-5 h-5" />, title: "Simple and affordable", desc: "From boarding passes to movie tickets, there&apos;s pretty much nothing you can&apos;t do." },
+          {[
+            {
+              icon: <BookOpenIcon className="w-5 h-5" />,
+              title: "Industry Thought Leadership",
+              desc: "Powering the future of Bitcoin mining with sustainable hosting solutions that drive global innovation, economic empowerment, and financial sovereignty.",
+            },
+            {
+              icon: <MessagesSquareIcon className="w-5 h-5" />,
+              title: "Global Partnership",
+              desc: "Through strategic global partnerships, we shape forward-thinking Bitcoin Mining policies while delivering unparalleled value to investors in a rapidly evolving digital economy",
+            },
+            {
+              icon: <ThumbsUpIcon className="w-5 h-5" />,
+              title: "Simple to Use",
+              desc: "Start mining Bitcoin effortlessly—our hosting service handles the setup, maintenance, and energy management for you.",
+            },
           ].map((block, index) => (
-            <motion.div key={index} className="flex" variants={fadeUpVariant} whileInView="visible" viewport={{ once: false, amount: 0.2 }}>
+            <motion.div
+              key={index}
+              className="flex"
+              variants={fadeUpVariant}
+              whileInView="visible"
+              viewport={{ once: false, amount: 0.2 }}
+            >
               <span className="flex-shrink-0 inline-flex justify-center items-center w-[46px] h-[46px] rounded-full border bg-primary text-primary-foreground">
                 {block.icon}
               </span>
               <div className="ms-5 sm:ms-8">
-                <h3 className="text-base sm:text-lg font-semibold">{block.title}</h3>
+                <h3 className="text-base sm:text-lg font-semibold">
+                  {block.title}
+                </h3>
                 <p className="mt-1 text-muted-foreground">{block.desc}</p>
               </div>
             </motion.div>

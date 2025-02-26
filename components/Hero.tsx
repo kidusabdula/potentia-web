@@ -32,12 +32,12 @@ const Hero = () => {
         animate="visible"
         className="relative z-10 flex h-full flex-col items-center justify-center text-center text-white px-4 sm:px-6"
       >
-        <h1 className="mb-6 text-4xl font-bold font-sans sm:text-5xl md:text-6xl">
-          Build Today&apos;s Digital Transformation
+        <h1 className="mb-6 text-4xl font-bold font-sans sm:text-5xl md:text-5xl">
+          Bitcoin Mining: Building Digital Transformation
         </h1>
-        <p className="mb-8 max-w-xl text-lg font-sans sm:text-xl md:text-2xl">
-          Empowering the future with high-performance computing, Bitcoin
-          mining, and grid support.
+        <p className="mb-8 max-w-2xl text-lg font-sans sm:text-xl md:text-2xl">
+          Bitcoin mining investment unlocks digital asset growth, drives
+          transformation, and empowers economies.
         </p>
         <div>
           <Link href="/about" passHref>

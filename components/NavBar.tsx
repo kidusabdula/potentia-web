@@ -44,25 +44,37 @@ const Header = () => {
           </Link>
         </div>
 
-        {/* Logo in the Center */}
+        {/* Logo in the Center with Hover Animation */}
         <div className="absolute left-1/2 transform -translate-x-1/2">
-          <motion.img
-            src={scrolled ? "/Artboardb.png" : "/Artboardw.png"}
-            alt="Logo"
-            width={90}
-            height={40}
-            className="transition-opacity duration-300"
-            animate={{
-              opacity: 1,
-              y: scrolled ? 0 : 10,
-              scale: scrolled ? 1 : 2.5,
-            }}
-            transition={{
-              scale: { duration: 0.3, ease: "easeOut" },
-              duration: 0.3,
-              ease: "easeInOut",
-            }}
-          />
+          <Link href="/" className={linkClassName}>
+            <motion.img
+              src={scrolled ? "/Artboardb.png" : "/Artboardw.png"}
+              alt="Logo"
+              width={90}
+              height={40}
+              className="transition-opacity duration-300"
+              animate={{
+                opacity: 1,
+                y: scrolled ? 0 : 10,
+                scale: scrolled ? 1 : 2.5,
+              }}
+              whileHover={{
+                scale: scrolled ? 1.1 : 2.6, // Slightly increase scale on hover
+                y: scrolled ? -5 : 5, // Small bounce effect
+                transition: {
+                  duration: 0.2,
+                  ease: "easeInOut",
+                  type: "spring",
+                  stiffness: 300,
+                },
+              }}
+              transition={{
+                scale: { duration: 0.3, ease: "easeOut" },
+                duration: 0.3,
+                ease: "easeInOut",
+              }}
+            />
+          </Link>
         </div>
 
         {/* Right Navigation Links */}
