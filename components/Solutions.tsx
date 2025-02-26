@@ -3,7 +3,7 @@ import React from "react";
 import { motion } from "framer-motion";
 import Image from "next/image";
 
-// Animation variants for header, stats, and cards
+// Animation variants for header and cards
 const headerVariants = {
   hidden: { opacity: 0, y: -20 },
   visible: {
@@ -11,15 +11,6 @@ const headerVariants = {
     y: 0,
     transition: { duration: 0.8, ease: "easeOut" },
   },
-};
-
-const statVariants = {
-  hidden: { opacity: 0, scale: 0.8 },
-  visible: (i: number) => ({
-    opacity: 1,
-    scale: 1,
-    transition: { duration: 0.5, delay: i * 0.2, ease: "easeOut" },
-  }),
 };
 
 const cardVariants = {
@@ -36,10 +27,10 @@ const MiningSolutions: React.FC = () => {
     <section className="min-h-screen bg-transparent text-white flex flex-col items-center justify-center py-14 px-6 relative overflow-hidden">
       {/* Background Image */}
       <Image
-        src="/SolutionsImage.jpg"
+        src="/BackgroundMap.jpg"
         alt="Mining Solutions Background"
+        className="object-contain opacity-40"
         fill
-        className="object-cover opacity-40"
         priority
       />
 
@@ -61,110 +52,65 @@ const MiningSolutions: React.FC = () => {
           animate="visible"
         >
           <h1 className="text-4xl md:text-5xl font-bold text-white font-sans mb-4">
-            potentia Mining Solutions
+            Global Mining Opportunities
           </h1>
           <p className="text-lg md:text-xl text-zinc-300 max-w-2xl mx-auto">
-            Empowering the future of digital mining with cutting-edge technology, sustainable energy, and global impact.
+            Empowering the future of bitcoin mining with cutting edge
+            technology, sustainable energy, and global impact
           </p>
         </motion.div>
 
-        {/* Content Grid */}
-        <div className="w-full grid grid-cols-1 md:grid-cols-2 gap-12 md:gap-16">
-          {/* Left Stats - Stretched Out */}
-          <div className="flex flex-col items-center justify-between gap-12 md:gap-16 h-full">
-            <motion.div
-              custom={0}
-              variants={statVariants}
-              initial="hidden"
-              animate="visible"
-              className="text-center"
-            >
-              <span className="text-5xl md:text-6xl font-bold text-white">
-                100,000+
-              </span>
-              <p className="text-lg md:text-xl text-zinc-300 mt-4">
-                Active Miners Worldwide
-              </p>
-            </motion.div>
+        {/* Centered Text Content */}
+        <div className="w-full flex flex-col items-center gap-6 md:gap-8">
+          <motion.div
+            custom={0}
+            variants={cardVariants}
+            initial="hidden"
+            animate="visible"
+            className="bg-zinc-900 rounded-lg p-4 md:p-5 shadow-md border border-zinc-800 max-w-5xl w-full"
+          >
+            <h3 className="text-lg md:text-xl font-semibold text-white mb-2">
+              Bitcoin Mining Excellence
+            </h3>
+            <p className="text-sm md:text-base text-zinc-300 leading-relaxed">
+              potentia ensures top-tier performance by deploying the latest
+              ASIC miners, optimizing cooling systems, and securing
+              cost-effective, sustainable energy sources. potentia prioritize
+              uptime, security, and operational transparency, ensuring our
+              clients receive maximum mining efficiency and profitability.
+              With expert management, proactive maintenance, and a commitment
+              to innovation, we provide a seamless and scalable solution for
+              individuals and institutions looking to mine Bitcoin with
+              confidence.
+            </p>
+          </motion.div>
 
-            <motion.div
-              custom={1}
-              variants={statVariants}
-              initial="hidden"
-              animate="visible"
-              className="text-center"
-            >
-              <span className="text-5xl md:text-6xl font-bold text-white">
-                530 MW
-              </span>
-              <p className="text-lg md:text-xl text-zinc-300 mt-4">
-                Total Energy Capacity Globally
-              </p>
-            </motion.div>
-
-            <motion.div
-              custom={2}
-              variants={statVariants}
-              initial="hidden"
-              animate="visible"
-              className="text-center"
-            >
-              <span className="text-5xl md:text-6xl font-bold text-white">
-                5+
-              </span>
-              <p className="text-lg md:text-xl text-zinc-300 mt-4">
-                Countries of Operation
-              </p>
-            </motion.div>
-          </div>
-
-          {/* Right Text Content */}
-          <div className="flex flex-col gap-6 md:gap-8">
-            <motion.div
-              custom={0}
-              variants={cardVariants}
-              initial="hidden"
-              animate="visible"
-              className="bg-zinc-900 rounded-lg p-4 md:p-5 shadow-md border border-zinc-800 max-w-md mx-auto"
-            >
-              <h3 className="text-lg md:text-xl font-semibold text-white mb-2">
-                Bitcoin Mining Excellence
-              </h3>
-              <p className="text-sm md:text-base text-zinc-300 leading-relaxed">
-                Potentia leads global Bitcoin mining with advanced ASICs like the Bitmain Antminer S19, spanning the USA, Canada, Ethiopia, and China. We optimize hashrates (up to 100+ TH/s) via proof-of-work, ensuring network security and profitability while integrating renewable energy for sustainability, empowering 100,000+ miners worldwide.
-              </p>
-            </motion.div>
-
-            <motion.div
-              custom={1}
-              variants={cardVariants}
-              initial="hidden"
-              animate="visible"
-              className="bg-zinc-900 rounded-lg p-4 md:p-5 shadow-md border border-zinc-800 max-w-md mx-auto"
-            >
-              <h3 className="text-lg md:text-xl font-semibold text-white mb-2">
-                Cloud Mining & Hosting Innovation
-              </h3>
-              <p className="text-sm md:text-base text-zinc-300 leading-relaxed">
-                Our cloud mining platform offers scalable, cost-effective mining with 530 MW capacity across 5+ countries. Powered by HPC, it provides real-time monitoring, load balancing, and pool integration (e.g., F2Pool, AntPool), enabling remote participation while prioritizing energy efficiency and grid stability for businesses and individuals.
-              </p>
-            </motion.div>
-
-            <motion.div
-              custom={2}
-              variants={cardVariants}
-              initial="hidden"
-              animate="visible"
-              className="bg-zinc-900 rounded-lg p-4 md:p-5 shadow-md border border-zinc-800 max-w-md mx-auto"
-            >
-              <h3 className="text-lg md:text-xl font-semibold text-white mb-2">
-                Potentia Store Solutions
-              </h3>
-              <p className="text-sm md:text-base text-zinc-300 leading-relaxed">
-                In Dallas, our store distributes cutting-edge mining gear like WhatsMiner and Bitmain ASICs, offering tailored packages, consultations, and maintenance. We equip miners with tools for efficiency and profitability, supported by educational resources, making Potentia your hub for thriving in the Bitcoin mining ecosystem.
-              </p>
-            </motion.div>
-          </div>
+          <motion.div
+            custom={1}
+            variants={cardVariants}
+            initial="hidden"
+            animate="visible"
+            className="bg-zinc-900 rounded-lg p-4 md:p-5 shadow-md border border-zinc-800 max-w-5xl w-full"
+          >
+            <h3 className="text-lg md:text-xl font-semibold text-white mb-2">
+              Bitcoin Mining, Hosting and Innovation
+            </h3>
+            <p className="text-sm md:text-base text-zinc-300 leading-relaxed">
+              Our Bitcoin mining hosting service provides a seamless, secure,
+              and cost-efficient solution for individuals and institutions
+              looking to gain Bitcoin exposure without the complexities of
+              running their own mining operations. With a global footprint and
+              strong international partnerships, we offer state-of-the-art
+              facilities powered by sustainable energy sources, ensuring
+              optimal performance and profitability. Our strategically located
+              data centers benefit from competitive electricity rates and
+              government-friendly regulations, maximizing returns for our
+              clients. Whether you’re an investor, miner, or institution, our
+              turnkey hosting packages provide a hassle-free way to
+              participate in Bitcoin mining while supporting economic growth
+              in emerging markets
+            </p>
+          </motion.div>
         </div>
       </motion.div>
     </section>

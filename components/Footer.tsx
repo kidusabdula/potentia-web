@@ -1,77 +1,85 @@
 "use client";
+import React from "react";
 import { Footer, FooterColumn, FooterBottom, FooterContent } from "./ui/footer";
-import Image from "next/image"; // Import Next.js Image component
-import Link from "next/link"; // Import Next.js Link component
+import Image from "next/image";
+import Link from "next/link";
 
 export default function FooterSection() {
   return (
-    <footer className="w-full bg-background px-4 bg-black">
-      <div className="mx-auto max-w-container">
-        <Footer className="bg-black">
-          <FooterContent>
+    <footer className="w-full bg-black text-white px-4 py-12">
+      <div className="mx-auto max-w-6xl">
+        <Footer className="bg-transparent border-t border-zinc-800">
+          <FooterContent className="grid grid-cols-1 md:grid-cols-4 gap-8 py-10">
             {/* Logo Section */}
-            <FooterColumn className="col-span-2 sm:col-span-3 md:col-span-1">
-              <div className="flex items-center gap-2">
+            <FooterColumn className="flex items-center md:items-start">
+              <Link href="/" className="flex items-center gap-2">
                 <Image
                   src="/Artboardw.png"
                   alt="Potentia Logo"
-                  width={150}
-                  height={150}
+                  width={120}
+                  height={120}
+                  className="object-contain"
                 />
-              </div>
+              </Link>
             </FooterColumn>
 
             {/* About Us Section */}
             <FooterColumn>
-              <h3 className="text-md pt-1 font-semibold text-white">About Us</h3>
-              <Link href="/about" className="text-sm text-white hover:text-gray-300">
-                Our Story
-              </Link>
-              <Link href="/about#mission" className="text-sm text-white hover:text-gray-300">
-                Mission
-              </Link>
-              <Link href="/about#team" className="text-sm text-white hover:text-gray-300">
-                Team
-              </Link>
+              <h3 className="text-lg font-semibold text-white mb-4">About Us</h3>
+              <div className="flex flex-col gap-3">
+                <Link href="/about" className="text-sm text-zinc-400 hover:text-white transition-colors duration-200">
+                  Our Story
+                </Link>
+                <Link href="/about#mission" className="text-sm text-zinc-400 hover:text-white transition-colors duration-200">
+                  Mission
+                </Link>
+                <Link href="/about#team" className="text-sm text-zinc-400 hover:text-white transition-colors duration-200">
+                  Team
+                </Link>
+              </div>
             </FooterColumn>
 
-            {/* Contact Us Section */}
+            {/* Contact Section */}
             <FooterColumn>
-              <h3 className="text-md pt-1 font-semibold text-white">Contact Us</h3>
-              <Link href="mailto:support@potentia.com" className="text-sm text-white hover:text-gray-300">
-                Email Us
-              </Link>
-              <Link href="tel:+1234567890" className="text-sm text-white hover:text-gray-300">
-                Call Us
-              </Link>
-              <Link href="/contact" className="text-sm text-white hover:text-gray-300">
-                Contact Form
-              </Link>
+              <h3 className="text-lg font-semibold text-white mb-4">Contact</h3>
+              <div className="flex flex-col gap-3">
+                <Link href="mailto:support@potentia.com" className="text-sm text-zinc-400 hover:text-white transition-colors duration-200">
+                  Email Us
+                </Link>
+                <Link href="tel:+1234567890" className="text-sm text-zinc-400 hover:text-white transition-colors duration-200">
+                  Call Us
+                </Link>
+                <Link href="/contact" className="text-sm text-zinc-400 hover:text-white transition-colors duration-200">
+                  Contact Form
+                </Link>
+              </div>
             </FooterColumn>
 
             {/* Social Media Section */}
             <FooterColumn>
-              <h3 className="text-md pt-1 font-semibold text-white">Follow Us</h3>
-              <Link href="https://twitter.com/potentia" className="text-sm text-white hover:text-gray-300">
-                Twitter
-              </Link>
-              <Link href="https://instagram.com/potentia" className="text-sm text-white hover:text-gray-300">
-                Instagram
-              </Link>
-              <Link href="https://linkedin.com/company/potentia" className="text-sm text-white hover:text-gray-300">
-                LinkedIn
-              </Link>
+              <h3 className="text-lg font-semibold text-white mb-4">Social Media</h3>
+              <div className="flex flex-col gap-3">
+                <Link href="https://twitter.com/potentia" className="text-sm text-zinc-400 hover:text-white transition-colors duration-200">
+                  Twitter
+                </Link>
+                <Link href="https://instagram.com/potentia" className="text-sm text-zinc-400 hover:text-white transition-colors duration-200">
+                  Instagram
+                </Link>
+                <Link href="https://linkedin.com/company/potentia" className="text-sm text-zinc-400 hover:text-white transition-colors duration-200">
+                  LinkedIn
+                </Link>
+              </div>
             </FooterColumn>
           </FooterContent>
 
           {/* Footer Bottom */}
-          <FooterBottom>
-            <div>© 2025 Potentia. All rights reserved</div>
-            <div className="flex items-center gap-4">
-              <Link href="/privacy" className="text-sm text-white hover:text-gray-300">
+          <FooterBottom className="flex flex-col md:flex-row justify-between items-center py-6 border-t border-zinc-800 text-sm text-zinc-400">
+            <div>© 2025 Potentia. All rights reserved.</div>
+            <div className="flex gap-6 mt-4 md:mt-0">
+              <Link href="/privacy" className="hover:text-white transition-colors duration-200">
                 Privacy Policy
               </Link>
-              <Link href="/terms" className="text-sm text-white hover:text-gray-300">
+              <Link href="/terms" className="hover:text-white transition-colors duration-200">
                 Terms of Service
               </Link>
             </div>

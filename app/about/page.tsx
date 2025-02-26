@@ -10,65 +10,62 @@ import {
   BarChart,
   FileText,
   Globe,
-  Rocket,
-  Zap,
-  MapPin,
   Award,
 } from "lucide-react";
 import Link from "next/link";
 import { Button } from "@/components/ui/button";
+
 const features = [
   {
-    title: "Bitcoin Mining Operations",
+    title: "Bitcoin Mining Excellence",
     description:
-      "Harnessing cutting-edge ASICs to power one of the world&apos;s largest Bitcoin mining networks, delivering unparalleled hashrates and profitability.",
+      "potentia ensures top-tier performance with state-of-the-art ASIC miners, optimized infrastructure, and cost-effective, sustainable energy solutions.",
     icon: Briefcase,
   },
   {
-    title: "Security & Compliance",
+    title: "Economic Empowerment",
     description:
-      "Fortifying our infrastructure with state-of-the-art cybersecurity and adhering to global compliance standards for secure operations.",
+      "We drive financial inclusion by making Bitcoin mining accessible, fostering new economic opportunities in emerging markets.",
     icon: Shield,
   },
   {
-    title: "Automation Excellence",
+    title: "Global Reach & Strategic Partnerships",
     description:
-      "Streamlining workflows with advanced automation, from task assignment to real-time grid support adjustments.",
+      "Our international presence and collaborations help shape forward-thinking Bitcoin mining policies while delivering unparalleled value to investors.",
     icon: Settings,
   },
   {
-    title: "Financial Innovation",
+    title: "Sustainable Energy Integration",
     description:
-      "Offering audit-ready financial tools tailored for crypto mining, budgeting, and revenue optimization.",
+      "By utilizing renewable energy sources and energy-efficient mining practices, we contribute to a greener, more sustainable mining industry.",
     icon: DollarSign,
   },
   {
-    title: "Team Empowerment",
+    title: "Education & Thought Leadership",
     description:
-      "Unifying our global workforce with seamless HR systems, fostering collaboration and innovation across continents.",
+      " We empower individuals and institutions with knowledge, providing insights on Bitcoin mining, digital finance, and emerging opportunities in the space.",
     icon: Users,
   },
   {
-    title: "Data-Driven Insights",
+    title: "Seamless Mining & Hosting Solutions ",
     description:
-      "Leveraging real-time analytics and comprehensive reporting to drive strategic decisions and operational efficiency.",
+      "From setup to maintenance, potentia offers a hassle-free mining experience, ensuring maximum uptime, security, and efficiency.",
     icon: BarChart,
   },
   {
-    title: "Documentation Hub",
+    title: "Driving Digital Transformation ",
     description:
-      "Centralizing all operational, technical, and compliance documents in a secure, accessible platform.",
+      "By bridging the gap between traditional finance and decentralized digital assets, we accelerate the adoption of Bitcoin and blockchain technologies.",
     icon: FileText,
   },
   {
-    title: "Global Reach",
+    title: "Financial Growth & Sovereignty",
     description:
-      "Expanding our footprint across 5+ countries, optimizing mining and HPC solutions for diverse markets.",
+      "We enable investors, miners, and institutions to gain Bitcoin exposure securely, fostering wealth generation and financial independence.",
     icon: Globe,
   },
 ];
 
-// Animation variants
 const fadeInUp = {
   hidden: { opacity: 0, y: 30 },
   visible: { opacity: 1, y: 0, transition: { duration: 0.8, ease: "easeOut" } },
@@ -99,7 +96,7 @@ const About = () => {
           initial="hidden"
           animate="visible"
         >
-          About Potentia
+          About Us
         </motion.h1>
         <motion.p
           className="mt-6 max-w-3xl text-center text-lg md:text-xl text-zinc-300 leading-relaxed"
@@ -108,18 +105,18 @@ const About = () => {
           animate="visible"
           transition={{ delay: 0.2 }}
         >
-          At Potentia, we&apos;re not just mining Bitcoin—we&apos;re pioneering
-          a revolution in digital transformation, high-performance computing,
-          and sustainable energy solutions. Discover our journey, technology,
-          and global impact.
+          We&apos;re not just mining Bitcoin—we&apos;re shaping the future of
+          sustainable and profitable Bitcoin mining. By leveraging advanced
+          technology, renewable energy, and global partnerships, we drive
+          economic growth and make mining more accessible. Explore our vision,
+          impact, and the opportunities ahead.
         </motion.p>
         <motion.div
           className="mt-10"
           initial={{ opacity: 0, scale: 0.8 }}
           animate={{ opacity: 1, scale: 1 }}
           transition={{ duration: 0.6, delay: 0.4 }}
-        >
-        </motion.div>
+        ></motion.div>
       </motion.section>
       {/* Mission & Vision */}
       <motion.section
@@ -133,33 +130,22 @@ const About = () => {
           <motion.div variants={fadeInUp}>
             <h2 className="text-4xl md:text-5xl font-bold mb-6">Our Mission</h2>
             <p className="text-zinc-300 text-lg leading-relaxed">
-              Leverage Bitcoin mining as a powerful catalyst for economic
-              empowerment, driving financial inclusion, fostering technological
-              advancement, and creating new opportunities for businesses and
-              individuals across Africa. By harnessing cutting-edge blockchain
-              technology, Bitcoin mining can stimulate infrastructure growth,
-              improve energy utilization, and promote investment in sustainable
-              power solutions. This innovation has the potential to transform
-              the continent’s digital economy, unlocking unprecedented access to
-              decentralized finance while supporting long-term economic
-              resilience and technological progress.
+              Our mission is to leverage Bitcoin mining as a catalyst for
+              economic empowerment, infrastructure growth, and energy innovation
+              on a global scale. Through sustainable mining solutions,
+              cutting-edge technology, and strategic partnerships, we make
+              Bitcoin mining more accessible, efficient, and impactful.
             </p>
           </motion.div>
           <motion.div variants={fadeInUp}>
             <h2 className="text-4xl md:text-5xl font-bold mb-6">Our Vision</h2>
             <p className="text-zinc-300 text-lg leading-relaxed">
-              We envision a future where Bitcoin mining serves as a driving
-              force for economic transformation, bridging the gap between
-              financial accessibility and technological innovation across
-              Africa. By integrating blockchain-powered solutions with scalable
-              infrastructure, we aim to create sustainable growth opportunities
-              that empower businesses, entrepreneurs, and entire industries. Our
-              mission extends beyond mining; we seek to revolutionize digital
-              finance, enhance energy efficiency, and foster strategic
-              investments in renewable power sources. As we push the boundaries
-              of decentralized technology, we are committed to shaping a
-              resilient and inclusive economy, paving the way for a new era of
-              prosperity and innovation.
+              Our vision is to be the global leader in sustainable Bitcoin
+              mining, driving financial sovereignty, economic growth, and
+              technological innovation. We aim to create a future where Bitcoin
+              mining is not only profitable but also a force for positive
+              change—powering economies, advancing renewable energy adoption,
+              and shaping the digital financial landscape.
             </p>
           </motion.div>
         </div>
@@ -204,69 +190,70 @@ const About = () => {
         variants={staggerChildren}
         initial="hidden"
         whileInView="visible"
-        viewport={{ once: true }}
+        viewport={{ once: true, amount: 0.2 }}
       >
         <div className="max-w-6xl mx-auto">
           <motion.h2
-            className="text-3xl md:text-4xl font-bold text-center mb-12"
+            className="text-3xl md:text-4xl font-bold text-center mb-12 text-zinc-900"
             variants={fadeInUp}
           >
-            Our Journey
+            potentia Story
           </motion.h2>
-          <div className="space-y-12">
-            <motion.div variants={fadeInUp} className="flex items-start gap-6">
-              <Rocket size={32} className="text-white flex-shrink-0" />
-              <div>
-                <h3 className="text-xl font-semibold">
-                  2018 - Founding Vision
-                </h3>
-                <p className="text-zinc-700 mt-2">
-                  Potentia was born from a vision to merge cryptocurrency mining
-                  with sustainable energy, starting with a small pilot facility
-                  in Texas.
-                </p>
-              </div>
-            </motion.div>
-            <motion.div variants={fadeInUp} className="flex items-start gap-6">
-              <Zap size={32} className="text-white flex-shrink-0" />
-              <div>
-                <h3 className="text-xl font-semibold">
-                  2020 - Grid Integration
-                </h3>
-                <p className="text-zinc-700 mt-2">
-                  We pioneered grid support by integrating mining operations
-                  with renewable energy sources, expanding to Iceland and
-                  Canada.
-                </p>
-              </div>
-            </motion.div>
-            <motion.div variants={fadeInUp} className="flex items-start gap-6">
-              <MapPin size={32} className="text-white flex-shrink-0" />
-              <div>
-                <h3 className="text-xl font-semibold">
-                  2023 - Global Footprint
-                </h3>
-                <p className="text-zinc-700 mt-2">
-                  Achieved a presence in 5+ countries, scaling to 530 MW of
-                  mining power and supporting over 100,000 miners worldwide.
-                </p>
-              </div>
-            </motion.div>
-            <motion.div variants={fadeInUp} className="flex items-start gap-6">
-              <Award size={32} className="text-white flex-shrink-0" />
-              <div>
-                <h3 className="text-xl font-semibold">
-                  2025 - Industry Leader
-                </h3>
-                <p className="text-zinc-700 mt-2">
-                  Recognized as a top innovator in Bitcoin mining and HPC,
-                  powering 200,000+ companies with sustainable tech solutions.
-                </p>
-              </div>
-            </motion.div>
+          <div className="relative">
+            {/* Vertical Timeline Line */}
+            <div className="absolute left-8 md:left-1/2 transform md:-translate-x-1/2 h-full w-1 bg-gradient-to-b from-zinc-900 to-zinc-500 z-0" />
+            <div className="space-y-16">
+              <motion.div
+                variants={fadeInUp}
+                className="relative flex items-start gap-6"
+              >
+                <div className="flex-shrink-0 w-16 h-16 bg-zinc-900 rounded-full flex items-center justify-center z-10">
+                  <Globe size={32} className="text-white" />
+                </div>
+                <div className="bg-zinc-50 p-6 rounded-lg shadow-md w-full md:w-[45%] md:mr-auto border border-zinc-200">
+                  <h3 className="text-xl font-semibold text-zinc-900">
+                    2025 - Bitcoin Mining in Africa
+                  </h3>
+                  <p className="text-zinc-700 mt-2">
+                    CEO Robert Luft discussed Bitcoin mining’s potential in
+                    Africa on Voice of America, highlighting our efforts to
+                    expand sustainable mining and economic empowerment in the
+                    region.{" "}
+                    <Link
+                      href="https://www.voaafrica.com/africa-54"
+                      target="_blank"
+                      rel="noopener noreferrer"
+                    >
+                      <span className="text-blue-600 hover:underline">
+                        Watch on VOA Africa
+                      </span>
+                    </Link>
+                  </p>
+                </div>
+              </motion.div>
+
+              <motion.div
+                variants={fadeInUp}
+                className="relative flex items-start gap-6"
+              >
+                <div className="flex-shrink-0 w-16 h-16 bg-zinc-900 rounded-full flex items-center justify-center z-10">
+                  <Award size={32} className="text-white" />
+                </div>
+                <div className="bg-zinc-50 p-6 rounded-lg shadow-md w-full md:w-[45%] md:ml-auto border border-zinc-200">
+                  <h3 className="text-xl font-semibold text-zinc-900">
+                    2025 - Industry Leader
+                  </h3>
+                  <p className="text-zinc-700 mt-2">
+                    Recognized as a top innovator in Bitcoin mining and HPC,
+                    powering 200,000+ companies with sustainable tech solutions.
+                  </p>
+                </div>
+              </motion.div>
+            </div>
           </div>
         </div>
       </motion.section>
+      {/* Global Impact */}
       <motion.section
         className="py-14 px-6 bg-white text-black"
         variants={staggerChildren}
@@ -274,51 +261,19 @@ const About = () => {
         whileInView="visible"
         viewport={{ once: true }}
       >
-        <div className="max-w-6xl mx-auto"></div>
+        <div className="max-w-6xl mx-auto">
           <motion.h2
             className="text-3xl md:text-4xl font-bold text-center mb-12"
             variants={fadeInUp}
           >
             Global Impact
           </motion.h2>
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-16">
-            <motion.div variants={fadeInUp}>
-              <h3 className="text-2xl font-semibold mb-4">Economic Growth</h3>
-              <p className="text-zinc-700 mb-4">
-                By powering over 200,000 companies, Potentia fuels economic
-                growth through decentralized finance and job creation in tech
-                hubs worldwide. Our operations have generated thousands of
-                direct and indirect jobs, from engineers maintaining
-                cutting-edge mining rigs to developers building financial tools
-                for the crypto economy.
-              </p>
-              <p className="text-zinc-700">
-                We&apos;ve also catalyzed local economies by partnering with
-                small businesses in regions like Texas, Iceland, and Kazakhstan,
-                providing them with access to affordable energy solutions and
-                blockchain-based revenue streams. In 2024 alone, our initiatives
-                contributed an estimated $1.2 billion to global GDP through
-                mining rewards and tech innovation.
-              </p>
-            </motion.div>
-            <motion.div variants={fadeInUp}>
-              <h3 className="text-2xl font-semibold mb-4">Sustainability</h3>
-              <p className="text-zinc-700 mb-4">
-                Our grid support initiatives reduce energy waste by consuming
-                surplus renewables, contributing to a greener planet across 5+
-                countries. By strategically locating mining facilities near
-                hydroelectric, wind, and solar plants, we&apos;ve diverted over
-                1.5 terawatt-hours of excess energy from being wasted,
-                equivalent to powering 150,000 homes annually.
-              </p>
-              <p className="text-zinc-700">
-                Potentia&apos;s commitment to carbon-neutral operations has
-                earned us partnerships with environmental organizations, and our
-                2025 goal is to offset 100% of our operational emissions through
-                reforestation and renewable energy credits, setting a new
-                standard for sustainability in the blockchain industry.
-              </p>
-            </motion.div>
+          <motion.p
+            className="text-zinc-700 text-lg leading-relaxed max-w-4xl mx-auto"
+            variants={fadeInUp}
+          >
+            We are driving a global shift in Bitcoin mining by fostering economic growth and energy innovation. Through our strategic international partnerships, we help shape Bitcoin mining policies, making the industry more accessible and sustainable. Our operations empower emerging markets by creating jobs, enhancing local infrastructure, and supporting renewable energy initiatives. By prioritizing efficiency, transparency, and responsible mining practices, potentia is not just contributing to the Bitcoin network—we are shaping a future where digital assets drive real-world progress and economic empowerment on a global scale.
+          </motion.p>
         </div>
       </motion.section>
       {/* CTA */}
@@ -330,20 +285,20 @@ const About = () => {
         viewport={{ once: true }}
       >
         <h2 className="text-3xl md:text-4xl font-bold mb-6">
-          Join the Potentia Revolution
+          Build Now
         </h2>
         <p className="text-zinc-300 max-w-2xl mx-auto mb-10">
           Ready to explore how Potentia can transform your business with
           innovative mining and HPC solutions? Let&apos;s connect.
         </p>
         <Link href="/contact" passHref>
-            <Button
-              variant="default"
-              size="lg"
-              className="px-8 py-3 bg-zinc-800/50 border border-zinc-700 text-white rounded-full hover:bg-zinc-700/50 transition-all duration-300"            
-            >
-              Contact Us
-            </Button>
+          <Button
+            variant="default"
+            size="lg"
+            className="px-8 py-3 bg-zinc-800/50 border border-zinc-700 text-white rounded-full hover:bg-zinc-700/50 transition-all duration-300"
+          >
+            Contact Us
+          </Button>
         </Link>
       </motion.section>
     </div>
