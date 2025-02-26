@@ -2,15 +2,16 @@
 import React from "react";
 import { motion } from "framer-motion";
 import {
-  Briefcase,
-  Shield,
-  Settings,
-  DollarSign,
-  Users,
-  BarChart,
-  FileText,
   Globe,
   Award,
+  Bitcoin,
+  HandCoins,
+  Handshake,
+  BatteryCharging,
+  BookOpen,
+  Blocks,
+  Cpu,
+  Shrub
 } from "lucide-react";
 import Link from "next/link";
 import { Button } from "@/components/ui/button";
@@ -20,49 +21,49 @@ const features = [
     title: "Bitcoin Mining Excellence",
     description:
       "potentia ensures top-tier performance with state-of-the-art ASIC miners, optimized infrastructure, and cost-effective, sustainable energy solutions.",
-    icon: Briefcase,
+    icon: Bitcoin,
   },
   {
     title: "Economic Empowerment",
     description:
       "We drive financial inclusion by making Bitcoin mining accessible, fostering new economic opportunities in emerging markets.",
-    icon: Shield,
+    icon: HandCoins,
   },
   {
     title: "Global Reach & Strategic Partnerships",
     description:
       "Our international presence and collaborations help shape forward-thinking Bitcoin mining policies while delivering unparalleled value to investors.",
-    icon: Settings,
+    icon: Handshake,
   },
   {
     title: "Sustainable Energy Integration",
     description:
       "By utilizing renewable energy sources and energy-efficient mining practices, we contribute to a greener, more sustainable mining industry.",
-    icon: DollarSign,
+    icon: BatteryCharging,
   },
   {
     title: "Education & Thought Leadership",
     description:
       " We empower individuals and institutions with knowledge, providing insights on Bitcoin mining, digital finance, and emerging opportunities in the space.",
-    icon: Users,
+    icon: BookOpen,
   },
   {
     title: "Seamless Mining & Hosting Solutions ",
     description:
       "From setup to maintenance, potentia offers a hassle-free mining experience, ensuring maximum uptime, security, and efficiency.",
-    icon: BarChart,
+    icon: Blocks,
   },
   {
     title: "Driving Digital Transformation ",
     description:
       "By bridging the gap between traditional finance and decentralized digital assets, we accelerate the adoption of Bitcoin and blockchain technologies.",
-    icon: FileText,
+    icon: Cpu,
   },
   {
     title: "Financial Growth & Sovereignty",
     description:
       "We enable investors, miners, and institutions to gain Bitcoin exposure securely, fostering wealth generation and financial independence.",
-    icon: Globe,
+    icon: Shrub
   },
 ];
 
