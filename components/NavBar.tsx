@@ -123,7 +123,7 @@ const Header = () => {
                   href="/faq"
                   className={`${linkClassName} hover:bg-gray-100 block`}
                 >
-                  FAQs
+                  Downloadables
                 </Link>
               </motion.div>
             )}
@@ -180,7 +180,7 @@ const Header = () => {
             className={mobileLinkClassName}
             onClick={() => setMenuOpen(false)}
           >
-            FAQs
+            Downloadables
           </Link>
         </div>
       </motion.nav>
