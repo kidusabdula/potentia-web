@@ -2,6 +2,7 @@
 import React, { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { Button } from "@/components/ui/button";
+import { Link } from "lucide-react";
 
 const Learn = () => {
   const [openSection, setOpenSection] = useState<number | null>(null);
@@ -113,6 +114,11 @@ const Learn = () => {
                     Potentia, we harness this process to pioneer digital
                     transformation.
                   </p>
+                  <a
+                    href="https://academy.binance.com/en/articles/how-to-mine-cryptocurrency?utm_campaign=googleadsxacademy&utm_source=googleadwords_int&utm_medium=cpc&ref=WMNC7PBZ&gad_source=1&gclid=CjwKCAiAlPu9BhAjEiwA5NDSA6rvWgZyVBcfWo-YyhIhr_t0A1y-ML34RY-On9r1QhrJ_OxywZ7HKBoCr1kQAvD_BwE"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                  >
                   <Button
                     variant="outline"
                     className="mt-4 text-black"
@@ -120,6 +126,7 @@ const Learn = () => {
                   >
                     Explore More
                   </Button>
+                  </a>
                 </motion.div>
               )}
             </AnimatePresence>
@@ -161,25 +168,25 @@ const Learn = () => {
                   <p>Bitcoin mining is a multi-step marvel of technology:</p>
                   <ul className="list-disc pl-6 mt-4 space-y-3">
                     <li>
-                      <strong>Transaction Gathering:</strong> Miners collect
+                      <strong>Transaction Compilation:</strong> Miners collect
                       pending transactions into a block from the mempool.
                     </li>
                     <li>
-                      <strong>Hashing Magic:</strong> Using SHA-256, miners
+                      <strong>Cryptographic Hashing:</strong> Using SHA-256, miners
                       tweak a nonce until the block&apos;s hash meets the
                       network&apos;s difficulty—a cryptographic race.
                     </li>
                     <li>
-                      <strong>Dynamic Difficulty:</strong> Adjusted every 2,016
+                      <strong>Difficulty Adjustment:</strong> Adjusted every 2,016
                       blocks, it keeps block times at 10 minutes as hashrate
                       fluctuates.
                     </li>
                     <li>
-                      <strong>Block Validation:</strong> A winning hash gets
+                      <strong>Block Validation and Consensus:</strong> A winning hash gets
                       broadcast, verified, and cemented into the blockchain.
                     </li>
                     <li>
-                      <strong>Reward System:</strong> Miners earn 3.125 BTC (as
+                      <strong>Incentive Mechanism:</strong> Miners earn 3.125 BTC (as
                       of 2025) per block, plus fees—your ticket to the crypto
                       economy.
                     </li>
@@ -188,13 +195,19 @@ const Learn = () => {
                     It&apos;s a high-stakes game powered by ASICs, and
                     Potentia&apos;s facilities are built to win it efficiently.
                   </p>
-                  <Button
-                    variant="outline"
-                    className="mt-4 text-black"
-                    size="sm"
+                  <a
+                    href="https://academy.binance.com/en/articles/how-to-mine-cryptocurrency?utm_campaign=googleadsxacademy&utm_source=googleadwords_int&utm_medium=cpc&ref=WMNC7PBZ&gad_source=1&gclid=CjwKCAiAlPu9BhAjEiwA5NDSA6rvWgZyVBcfWo-YyhIhr_t0A1y-ML34RY-On9r1QhrJ_OxywZ7HKBoCr1kQAvD_BwE"
+                    target="_blank"
+                    rel="noopener noreferrer"
                   >
-                    Dive Deeper
-                  </Button>
+                    <Button
+                      variant="outline"
+                      className="mt-4 text-black"
+                      size="sm"
+                    >
+                      Dive Deeper
+                    </Button>
+                  </a>
                 </motion.div>
               )}
             </AnimatePresence>
