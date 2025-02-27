@@ -5,7 +5,6 @@ import { MapContainer, TileLayer, GeoJSON, Marker, Popup } from 'react-leaflet';
 import 'leaflet/dist/leaflet.css';
 import L from 'leaflet';
 import countriesGeoJSON from '../public/custom.geo.json';
-import emailjs from '@emailjs/browser';
 
 interface MiningLocation {
   name: string;
@@ -15,7 +14,6 @@ interface MiningLocation {
   hashRate: string;
   facilitySize: string;
   availability: string;
-  networkPercentage: string;
 }
 
 interface MiningDataByCountry {
@@ -64,13 +62,25 @@ const MapboxMap: React.FC = () => {
 
   // Mock dataset of Bitcoin mining locations
   const miningLocations: MiningLocation[] = [
-    { name: 'Kazakhstan Mining Complex', coordinates: [66.9237, 48.0196], country: 'Kazakhstan', region: 'Akmola Region', hashRate: '100', facilitySize: '100', availability: 'Open', networkPercentage: '14.8%' },
-    { name: 'Brazil Mining Center', coordinates: [-46.6333, -23.5505], country: 'Brazil', region: 'State of São Paulo', hashRate: '25', facilitySize: '25', availability: 'Open', networkPercentage: '0.33%' },
-    { name: 'Ethiopia Mining Hub', coordinates: [40.4897, 9.1450], country: 'Ethiopia', region: 'Addis Ababa', hashRate: '50', facilitySize: '50', availability: 'Open', networkPercentage: '2.5%' },
-    { name: 'Indiana Mining Facility', coordinates: [-86.1349, 39.7684], country: 'USA', region: 'Indiana', hashRate: '75', facilitySize: '75', availability: 'Open' , networkPercentage: '35.4%'},
-    { name: 'Illinois Mining Complex', coordinates: [-89.3985, 40.6331], country: 'USA', region: 'Illinois', hashRate: '75', facilitySize: '75', availability: 'Open' , networkPercentage: '35.4%'},
-    // { name: 'Nigeria Mining Center', coordinates: [3.3792, 6.5244], country: 'Nigeria', region: 'Lagos', hashRate: '40', facilitySize: '40', availability: 'Open' }
+    { name: 'Kazakhstan Mining Complex', coordinates: [66.9237, 48.0196], country: 'Kazakhstan', region: 'Akmola Region', hashRate: '100', facilitySize: '100', availability: 'Open' },
+    { name: 'Brazil Mining Center', coordinates: [-46.6333, -23.5505], country: 'Brazil', region: 'State of São Paulo', hashRate: '25', facilitySize: '25', availability: 'Open' },
+    { name: 'Ethiopia Mining Hub', coordinates: [40.4897, 9.1450], country: 'Ethiopia', region: 'Addis', hashRate: '50', facilitySize: '50', availability: 'Open' },
+    { name: 'Indiana Mining Facility', coordinates: [-86.1349, 39.7684], country: 'USA', region: 'Indiana', hashRate: '75', facilitySize: '75', availability: 'Open' },
+    { name: 'Illinois Mining Complex', coordinates: [-89.3985, 40.6331], country: 'USA', region: 'Illinois', hashRate: '75', facilitySize: '75', availability: 'Open' },
+    { name: 'Nigeria Mining Center', coordinates: [3.3792, 6.5244], country: 'Nigeria', region: 'Lagos', hashRate: '40', facilitySize: '40', availability: 'Open' }
   ];
+
+  const miningDataByCountry: MiningDataByCountry = miningLocations.reduce((acc: MiningDataByCountry, location) => {
+    if (!acc[location.country]) {
+      acc[location.country] = { hashRate: 0, facilitySize: 0, locations: 0, networkPercentage: '0' };
+    }
+    acc[location.country].hashRate += parseFloat(location.hashRate);
+    acc[location.country].facilitySize += parseFloat(location.facilitySize);
+    acc[location.country].locations += 1;
+    // Calculate network percentage (mock total network hash rate of 1000 TH/s)
+    acc[location.country].networkPercentage = ((parseFloat(location.hashRate) / 1000) * 100).toFixed(1);
+    return acc;
+  }, {});
 
   const customIcon: L.DivIcon = new L.DivIcon({
     className: 'mining-marker',
@@ -82,6 +92,7 @@ const MapboxMap: React.FC = () => {
     `,
     iconSize: [24, 24],
   });
+
   const handleInputChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>): void => {
     const { id, value } = e.target;
     setFormData(prev => ({
@@ -89,33 +100,39 @@ const MapboxMap: React.FC = () => {
       [id]: value
     }));
   };
+
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>): Promise<void> => {
     e.preventDefault();
     setFormStatus({ isSubmitting: true, isSuccess: false, error: null });
-  try {
-    await emailjs.send(
-      'service_v56md1p', // Replace with your EmailJS service ID
-      'template_udglllb', // Replace with your EmailJS template ID
-      {
-        from_name: formData.name,
-        from_email: formData.email,
-        message: formData.message,
-        location_name: selectedLocation?.name || 'Not specified',
-        location_country: selectedLocation?.country || 'Not specified',
-        location_region: selectedLocation?.region || 'Not specified',
-      },
-      'byVNdgtC-5hoSDIl_' // Replace with your EmailJS public key
-    );
-    setFormStatus({ isSubmitting: false, isSuccess: true, error: null });
-    setFormData({ name: '', email: '', message: '' });
-  } catch (error) {
-    setFormStatus({
-      isSubmitting: false,
-      isSuccess: false,
-      error: 'Failed to send message. Please try again.'
-    });
-  }
-};
+
+    // try {
+    //   const response = await fetch('https://formsubmit.co/ajax/minyelyeab@gmail.com', {
+    //     method: 'POST',
+    //     headers: {
+    //       'Content-Type': 'application/json',
+    //       'Accept': 'application/json'
+    //     },
+    //     body: JSON.stringify({
+    //       name: formData.name,
+    //       email: formData.email,
+    //       message: formData.message,
+    //       _subject: `New contact from ${formData.name} - Mining Location Inquiry`
+    //     })
+    //   });
+
+    //   if (!response.ok) throw new Error('Failed to send message');
+
+    //   setFormStatus({ isSubmitting: false, isSuccess: true, error: null });
+    //   setFormData({ name: '', email: '', message: '' });
+    // } catch (error) {
+    //   setFormStatus({
+    //     isSubmitting: false,
+    //     isSuccess: false,
+    //     error: 'Failed to send message. Please try again.'
+    //   });
+    // }
+  };
+
   return (
     <div className="flex flex-col md:flex-row h-screen bg-black text-white">
       {/* Left Side: Summary */}
@@ -130,7 +147,7 @@ const MapboxMap: React.FC = () => {
             </div>
             <div className="flex justify-between items-center">
               <span className="text-gray-400">Global Hash Rate</span>
-              <span className="font-mono text-gray-300">693806.189 EH/s</span>
+              <span className="font-mono text-gray-300">1000 TH/s</span>
             </div>
           </div>
         </div>
@@ -138,21 +155,7 @@ const MapboxMap: React.FC = () => {
         <h2 className="text-2xl font-bold mb-6 text-white">
           Mining Facilities
         </h2>
-        {Object.entries(miningLocations.reduce((acc, location) => {
-          const key = location.country;
-          if (!acc[key]) {
-            acc[key] = {
-              hashRate: 0,
-              facilitySize: 0,
-              networkPercentage: location.networkPercentage,
-              locations: 0
-            };
-          }
-          acc[key].hashRate += parseInt(location.hashRate);
-          acc[key].facilitySize += parseInt(location.facilitySize);
-          acc[key].locations += 1;
-          return acc;
-        }, {} as MiningDataByCountry)).map(([country, data]) => (
+        {Object.entries(miningDataByCountry).map(([country, data]) => (
           <div key={country}
                className="mb-4 p-4 rounded-xl backdrop-blur-md bg-black hover:bg-gray-800 transition-all duration-300 border border-gray-700 cursor-pointer">
             <h3 className="font-bold text-xl mb-2 text-white">{country}</h3>
@@ -163,7 +166,7 @@ const MapboxMap: React.FC = () => {
               </div>
               <div className="flex justify-between items-center">
                 <span className="text-gray-400">Network %</span>
-                <span className="font-mono text-gray-300">{data.networkPercentage}</span>
+                <span className="font-mono text-gray-300">{data.networkPercentage}%</span>
               </div>
               <div className="flex justify-between items-center">
                 <span className="text-gray-400">Facility Size</span>
