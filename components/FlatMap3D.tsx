@@ -1,10 +1,11 @@
-'use client';
+"use client";
 
-import React, { useState } from 'react';
-import { MapContainer, TileLayer, GeoJSON, Marker, Popup } from 'react-leaflet';
-import 'leaflet/dist/leaflet.css';
-import L from 'leaflet';
-import countriesGeoJSON from '../public/custom.geo.json';
+import React, { useState } from "react";
+import { MapContainer, TileLayer, GeoJSON, Marker, Popup } from "react-leaflet";
+import "leaflet/dist/leaflet.css";
+import L from "leaflet";
+import countriesGeoJSON from "../public/custom.geo.json";
+import emailjs from "@emailjs/browser";
 
 interface MiningLocation {
   name: string;
@@ -14,6 +15,7 @@ interface MiningLocation {
   hashRate: string;
   facilitySize: string;
   availability: string;
+  networkPercentage: string;
 }
 
 interface MiningDataByCountry {
@@ -48,42 +50,76 @@ interface FormStatus {
 // }
 
 const MapboxMap: React.FC = () => {
-  const [selectedLocation, setSelectedLocation] = useState<MiningLocation | null>(null);
+  const [selectedLocation, setSelectedLocation] =
+    useState<MiningLocation | null>(null);
   const [formData, setFormData] = useState<FormData>({
-    name: '',
-    email: '',
-    message: ''
+    name: "",
+    email: "",
+    message: "",
   });
   const [formStatus, setFormStatus] = useState<FormStatus>({
     isSubmitting: false,
     isSuccess: false,
-    error: null
+    error: null,
   });
 
   // Mock dataset of Bitcoin mining locations
   const miningLocations: MiningLocation[] = [
-    { name: 'Kazakhstan Mining Complex', coordinates: [66.9237, 48.0196], country: 'Kazakhstan', region: 'Akmola Region', hashRate: '100', facilitySize: '100', availability: 'Open' },
-    { name: 'Brazil Mining Center', coordinates: [-46.6333, -23.5505], country: 'Brazil', region: 'State of São Paulo', hashRate: '25', facilitySize: '25', availability: 'Open' },
-    { name: 'Ethiopia Mining Hub', coordinates: [40.4897, 9.1450], country: 'Ethiopia', region: 'Addis', hashRate: '50', facilitySize: '50', availability: 'Open' },
-    { name: 'Indiana Mining Facility', coordinates: [-86.1349, 39.7684], country: 'USA', region: 'Indiana', hashRate: '75', facilitySize: '75', availability: 'Open' },
-    { name: 'Illinois Mining Complex', coordinates: [-89.3985, 40.6331], country: 'USA', region: 'Illinois', hashRate: '75', facilitySize: '75', availability: 'Open' },
-    { name: 'Nigeria Mining Center', coordinates: [3.3792, 6.5244], country: 'Nigeria', region: 'Lagos', hashRate: '40', facilitySize: '40', availability: 'Open' }
+    {
+      name: "Kazakhstan Mining Complex",
+      coordinates: [66.9237, 48.0196],
+      country: "Kazakhstan",
+      region: "Akmola Region",
+      hashRate: "100",
+      facilitySize: "100",
+      availability: "Open",
+      networkPercentage: "14.8%",
+    },
+    {
+      name: "Brazil Mining Center",
+      coordinates: [-46.6333, -23.5505],
+      country: "Brazil",
+      region: "State of São Paulo",
+      hashRate: "25",
+      facilitySize: "25",
+      availability: "Open",
+      networkPercentage: "0.33%",
+    },
+    {
+      name: "Ethiopia Mining Hub",
+      coordinates: [40.4897, 9.145],
+      country: "Ethiopia",
+      region: "Addis Ababa",
+      hashRate: "50",
+      facilitySize: "50",
+      availability: "Open",
+      networkPercentage: "2.5%",
+    },
+    {
+      name: "Indiana Mining Facility",
+      coordinates: [-86.1349, 39.7684],
+      country: "USA",
+      region: "Indiana",
+      hashRate: "75",
+      facilitySize: "75",
+      availability: "Open",
+      networkPercentage: "35.4%",
+    },
+    {
+      name: "Illinois Mining Complex",
+      coordinates: [-89.3985, 40.6331],
+      country: "USA",
+      region: "Illinois",
+      hashRate: "75",
+      facilitySize: "75",
+      availability: "Open",
+      networkPercentage: "35.4%",
+    },
+    // { name: 'Nigeria Mining Center', coordinates: [3.3792, 6.5244], country: 'Nigeria', region: 'Lagos', hashRate: '40', facilitySize: '40', availability: 'Open' }
   ];
 
-  const miningDataByCountry: MiningDataByCountry = miningLocations.reduce((acc: MiningDataByCountry, location) => {
-    if (!acc[location.country]) {
-      acc[location.country] = { hashRate: 0, facilitySize: 0, locations: 0, networkPercentage: '0' };
-    }
-    acc[location.country].hashRate += parseFloat(location.hashRate);
-    acc[location.country].facilitySize += parseFloat(location.facilitySize);
-    acc[location.country].locations += 1;
-    // Calculate network percentage (mock total network hash rate of 1000 TH/s)
-    acc[location.country].networkPercentage = ((parseFloat(location.hashRate) / 1000) * 100).toFixed(1);
-    return acc;
-  }, {});
-
   const customIcon: L.DivIcon = new L.DivIcon({
-    className: 'mining-marker',
+    className: "mining-marker",
     html: `
       <div class="marker-inner">
         <div class="marker-pulse"></div>
@@ -92,54 +128,53 @@ const MapboxMap: React.FC = () => {
     `,
     iconSize: [24, 24],
   });
-
-  const handleInputChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>): void => {
+  const handleInputChange = (
+    e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
+  ): void => {
     const { id, value } = e.target;
-    setFormData(prev => ({
+    setFormData((prev) => ({
       ...prev,
-      [id]: value
+      [id]: value,
     }));
   };
-
-  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>): Promise<void> => {
+  const handleSubmit = async (
+    e: React.FormEvent<HTMLFormElement>
+  ): Promise<void> => {
     e.preventDefault();
     setFormStatus({ isSubmitting: true, isSuccess: false, error: null });
-
-    // try {
-    //   const response = await fetch('https://formsubmit.co/ajax/minyelyeab@gmail.com', {
-    //     method: 'POST',
-    //     headers: {
-    //       'Content-Type': 'application/json',
-    //       'Accept': 'application/json'
-    //     },
-    //     body: JSON.stringify({
-    //       name: formData.name,
-    //       email: formData.email,
-    //       message: formData.message,
-    //       _subject: `New contact from ${formData.name} - Mining Location Inquiry`
-    //     })
-    //   });
-
-    //   if (!response.ok) throw new Error('Failed to send message');
-
-    //   setFormStatus({ isSubmitting: false, isSuccess: true, error: null });
-    //   setFormData({ name: '', email: '', message: '' });
-    // } catch (error) {
-    //   setFormStatus({
-    //     isSubmitting: false,
-    //     isSuccess: false,
-    //     error: 'Failed to send message. Please try again.'
-    //   });
-    // }
+    try {
+      await emailjs.send(
+        "service_v56md1p", // Replace with your EmailJS service ID
+        "template_udglllb", // Replace with your EmailJS template ID
+        {
+          from_name: formData.name,
+          from_email: formData.email,
+          message: formData.message,
+          location_name: selectedLocation?.name || "Not specified",
+          location_country: selectedLocation?.country || "Not specified",
+          location_region: selectedLocation?.region || "Not specified",
+        },
+        "byVNdgtC-5hoSDIl_" // Replace with your EmailJS public key
+      );
+      setFormStatus({ isSubmitting: false, isSuccess: true, error: null });
+      setFormData({ name: "", email: "", message: "" });
+    } catch {
+      setFormStatus({
+        isSubmitting: false,
+        isSuccess: false,
+        error: "Failed to send message. Please try again.",
+      });
+    }
   };
-
   return (
     <div className="flex flex-col md:flex-row h-screen bg-black text-white">
       {/* Left Side: Summary */}
       <div className="md:w-1/4 p-6 md:border-r border-b md:border-b-0 border-gray-800 overflow-y-auto bg-black order-2 md:order-1 hidden lg:block">
         {/* Global Stats Box */}
         <div className="mb-6 p-4 rounded-xl backdrop-blur-md bg-black border border-gray-700">
-          <h2 className="text-xl font-bold mb-4 text-white">Global Statistics</h2>
+          <h2 className="text-xl font-bold mb-4 text-white">
+            Global Statistics
+          </h2>
           <div className="space-y-2">
             <div className="flex justify-between items-center">
               <span className="text-gray-400">BTC Price</span>
@@ -147,7 +182,7 @@ const MapboxMap: React.FC = () => {
             </div>
             <div className="flex justify-between items-center">
               <span className="text-gray-400">Global Hash Rate</span>
-              <span className="font-mono text-gray-300">1000 TH/s</span>
+              <span className="font-mono text-gray-300">693806.189 EH/s</span>
             </div>
           </div>
         </div>
@@ -155,22 +190,46 @@ const MapboxMap: React.FC = () => {
         <h2 className="text-2xl font-bold mb-6 text-white">
           Mining Facilities
         </h2>
-        {Object.entries(miningDataByCountry).map(([country, data]) => (
-          <div key={country}
-               className="mb-4 p-4 rounded-xl backdrop-blur-md bg-black hover:bg-gray-800 transition-all duration-300 border border-gray-700 cursor-pointer">
+        {Object.entries(
+          miningLocations.reduce((acc, location) => {
+            const key = location.country;
+            if (!acc[key]) {
+              acc[key] = {
+                hashRate: 0,
+                facilitySize: 0,
+                networkPercentage: location.networkPercentage,
+                locations: 0,
+              };
+            }
+            acc[key].hashRate += parseInt(location.hashRate);
+            acc[key].facilitySize += parseInt(location.facilitySize);
+            acc[key].locations += 1;
+            return acc;
+          }, {} as MiningDataByCountry)
+        ).map(([country, data]) => (
+          <div
+            key={country}
+            className="mb-4 p-4 rounded-xl backdrop-blur-md bg-black hover:bg-gray-800 transition-all duration-300 border border-gray-700 cursor-pointer"
+          >
             <h3 className="font-bold text-xl mb-2 text-white">{country}</h3>
             <div className="space-y-2 text-sm">
               <div className="flex justify-between items-center">
                 <span className="text-gray-400">Hash Rate</span>
-                <span className="font-mono text-gray-300">{data.hashRate} TH/s</span>
+                <span className="font-mono text-gray-300">
+                  {data.hashRate} TH/s
+                </span>
               </div>
               <div className="flex justify-between items-center">
                 <span className="text-gray-400">Network %</span>
-                <span className="font-mono text-gray-300">{data.networkPercentage}%</span>
+                <span className="font-mono text-gray-300">
+                  {data.networkPercentage}
+                </span>
               </div>
               <div className="flex justify-between items-center">
                 <span className="text-gray-400">Facility Size</span>
-                <span className="font-mono text-gray-300">{data.facilitySize} MW</span>
+                <span className="font-mono text-gray-300">
+                  {data.facilitySize} MW
+                </span>
               </div>
             </div>
           </div>
@@ -180,89 +239,112 @@ const MapboxMap: React.FC = () => {
       {/* Center: Map */}
       <div className="h-screen md:h-screen md:flex-1 relative order-1 md:order-2">
         <div className="absolute inset-0 m-4 rounded-2xl overflow-hidden border border-white/10 shadow-2xl">
-        <MapContainer
-        center={[30, 0]}
-        zoom={2}
-        style={{ height: "100%", width: "100%", backgroundColor: "#000" }}
-        minZoom={2}
-        maxBounds={[[-90, -180], [90, 180]]}
-        zoomControl={false}
-        attributionControl={false}
-      >
-        <TileLayer
-          url="https://stamen-tiles.a.ssl.fastly.net/toner-background/{z}/{x}/{y}.png"
-          className="invert"
-        />
+          <MapContainer
+            center={[30, 0]}
+            zoom={2}
+            style={{ height: "100%", width: "100%", backgroundColor: "#000" }}
+            minZoom={2}
+            maxBounds={[
+              [-90, -180],
+              [90, 180],
+            ]}
+            zoomControl={false}
+            attributionControl={false}
+          >
+            <TileLayer
+              url="https://stamen-tiles.a.ssl.fastly.net/toner-background/{z}/{x}/{y}.png"
+              className="invert"
+            />
 
-        <GeoJSON
-          data={countriesGeoJSON as GeoJSON.GeoJsonObject}
-          onEachFeature={() => {}}
-          style={{
-            fillColor: "#fff",
-            fillOpacity: 1,
-            color: "#fff",
-            weight: 1,
-          }}
-        />
+            <GeoJSON
+              data={countriesGeoJSON as GeoJSON.GeoJsonObject}
+              onEachFeature={() => {}}
+              style={{
+                fillColor: "#fff",
+                fillOpacity: 1,
+                color: "#fff",
+                weight: 1,
+              }}
+            />
 
-        {Object.values(miningLocations).flat().map((location) => (
-          <Marker
-          key={location.name}
-          position={[location.coordinates[1], location.coordinates[0]]}
-          icon={customIcon}
-          eventHandlers={{
-            click: () => setSelectedLocation(location)
-          }}
-        >
-          <Popup className="custom-popup">
-            <div className="p-4 bg-black/95 backdrop-blur-md rounded-lg shadow-xl">
-              <h3 className="text-lg font-bold text-white mb-2">{location.name}</h3>
-              <p className="text-gray-300">🌍 {location.country}</p>
-              <p className="text-gray-300">⚡ {location.hashRate} TH/s</p>
-              <p className="text-gray-300">📊 {location.facilitySize} MW</p>
-            </div>
-          </Popup>
-        </Marker>
-        ))}
-      </MapContainer>
-          
+            {Object.values(miningLocations)
+              .flat()
+              .map((location) => (
+                <Marker
+                  key={location.name}
+                  position={[location.coordinates[1], location.coordinates[0]]}
+                  icon={customIcon}
+                  eventHandlers={{
+                    click: () => setSelectedLocation(location),
+                  }}
+                >
+                  <Popup className="custom-popup">
+                    <div className="p-4 bg-black/95 backdrop-blur-md rounded-lg shadow-xl">
+                      <h3 className="text-lg font-bold text-white mb-2">
+                        {location.name}
+                      </h3>
+                      <p className="text-gray-300">🌍 {location.country}</p>
+                      <p className="text-gray-300">
+                        ⚡ {location.hashRate} TH/s
+                      </p>
+                      <p className="text-gray-300">
+                        📊 {location.facilitySize} MW
+                      </p>
+                    </div>
+                  </Popup>
+                </Marker>
+              ))}
+          </MapContainer>
         </div>
       </div>
 
       {/* Right Side: Selected Location */}
       <div className="md:w-1/4 p-6 md:border-l border-t md:border-t-0 border-gray-800 overflow-y-auto bg-black order-3 ">
-        <h2 className="text-2xl font-bold mb-6">
-          Location Details
-        </h2>
+        <h2 className="text-2xl font-bold mb-6">Location Details</h2>
         {selectedLocation ? (
           <div className="space-y-6">
             <div className="p-6 rounded-xl bg-black border border-gray-700">
-              <h3 className="text-xl font-bold mb-4 text-white">{selectedLocation.name}</h3>
+              <h3 className="text-xl font-bold mb-4 text-white">
+                {selectedLocation.name}
+              </h3>
               <div className="space-y-4">
                 <div className="flex items-center space-x-3">
                   <span className="text-gray-400">Location</span>
-                  <span className="font-medium text-gray-300">{selectedLocation.country} ({selectedLocation.region})</span>
+                  <span className="font-medium text-gray-300">
+                    {selectedLocation.country} ({selectedLocation.region})
+                  </span>
                 </div>
                 <div className="flex items-center space-x-3">
                   <span className="text-gray-400">Hash Rate</span>
-                  <span className="font-mono text-gray-300">{selectedLocation.hashRate} TH/s</span>
+                  <span className="font-mono text-gray-300">
+                    {selectedLocation.hashRate} TH/s
+                  </span>
                 </div>
                 <div className="flex items-center space-x-3">
                   <span className="text-gray-400">Facility Size</span>
-                  <span className="font-mono text-gray-300">{selectedLocation.facilitySize} MW</span>
+                  <span className="font-mono text-gray-300">
+                    {selectedLocation.facilitySize} MW
+                  </span>
                 </div>
                 <div className="flex items-center space-x-3">
                   <span className="text-gray-400">Availability</span>
-                  <span className="font-medium text-green-500">{selectedLocation.availability}</span>
+                  <span className="font-medium text-green-500">
+                    {selectedLocation.availability}
+                  </span>
                 </div>
               </div>
             </div>
-            
+
             <div className="p-6 rounded-xl bg-black border border-gray-700">
               <h3 className="text-xl font-bold mb-4 text-white">Build Now</h3>
               <form onSubmit={handleSubmit} className="space-y-4">
                 <div>
-                  <label htmlFor="name" className="block text-sm font-medium text-gray-400 mb-1">Name</label>
+                  <label
+                    htmlFor="name"
+                    className="block text-sm font-medium text-gray-400 mb-1"
+                  >
+                    Name
+                  </label>
                   <input
                     type="text"
                     id="name"
@@ -274,7 +356,12 @@ const MapboxMap: React.FC = () => {
                   />
                 </div>
                 <div>
-                  <label htmlFor="email" className="block text-sm font-medium text-gray-400 mb-1">Email</label>
+                  <label
+                    htmlFor="email"
+                    className="block text-sm font-medium text-gray-400 mb-1"
+                  >
+                    Email
+                  </label>
                   <input
                     type="email"
                     id="email"
@@ -286,7 +373,12 @@ const MapboxMap: React.FC = () => {
                   />
                 </div>
                 <div>
-                  <label htmlFor="message" className="block text-sm font-medium text-gray-400 mb-1">Message</label>
+                  <label
+                    htmlFor="message"
+                    className="block text-sm font-medium text-gray-400 mb-1"
+                  >
+                    Message
+                  </label>
                   <textarea
                     id="message"
                     value={formData.message}
@@ -301,28 +393,33 @@ const MapboxMap: React.FC = () => {
                   <div className="text-red-500 text-sm">{formStatus.error}</div>
                 )}
                 {formStatus.isSuccess && (
-                  <div className="text-green-500 text-sm">Message sent successfully!</div>
+                  <div className="text-green-500 text-sm">
+                    Message sent successfully!
+                  </div>
                 )}
                 <button
                   type="submit"
                   disabled={formStatus.isSubmitting}
                   className="w-full bg-blue-600 hover:bg-blue-700 text-white font-medium py-2 px-4 rounded-lg transition-colors duration-200 disabled:opacity-50 disabled:cursor-not-allowed"
                 >
-                  {formStatus.isSubmitting ? 'Sending...' : 'Send Message'}
+                  {formStatus.isSubmitting ? "Sending..." : "Send Message"}
                 </button>
               </form>
             </div>
           </div>
         ) : (
           <div className="text-center p-6 rounded-xl bg-gray-900 border border-gray-700">
-            <p className="text-gray-400">Select a location on the map to view details</p>
+            <p className="text-gray-400">
+              Select a location on the map to view details
+            </p>
           </div>
         )}
       </div>
 
       <style jsx global>{`
         .inverted-map {
-          filter: invert(1) hue-rotate(180deg) brightness(0.85) contrast(1.1) saturate(0.8);
+          filter: invert(1) hue-rotate(180deg) brightness(0.85) contrast(1.1)
+            saturate(0.8);
           mix-blend-mode: difference;
         }
 
@@ -351,7 +448,7 @@ const MapboxMap: React.FC = () => {
           left: 50%;
           width: 8px;
           height: 8px;
-          background: #60A5FA;
+          background: #60a5fa;
           border-radius: 50%;
           transform: translate(-50%, -50%);
         }
