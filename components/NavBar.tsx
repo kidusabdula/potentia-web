@@ -62,7 +62,7 @@ const Header = () => {
                 scale: scrolled ? 1.1 : 2.6, // Slightly increase scale on hover
                 y: scrolled ? -5 : 5, // Small bounce effect
                 transition: {
-                  duration: 0.2,
+                  duration: 0.7,
                   ease: "easeInOut",
                   type: "spring",
                   stiffness: 300,
