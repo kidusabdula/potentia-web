@@ -11,6 +11,9 @@ import { NavbarProvider } from "@/context/NavBarContext";
 export const metadata: Metadata = {
   title: "Potentia",
   description: "Bitcoin Mining",
+  icons: {
+    icon: "/O.png", 
+  },
 };
 
 export default function RootLayout({
