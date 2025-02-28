@@ -317,7 +317,7 @@ const MapboxMap: React.FC = () => {
                 <div className="flex items-center space-x-3">
                   <span className="text-gray-400">Hash Rate</span>
                   <span className="font-mono text-gray-300">
-                    {selectedLocation.hashRate} TH/s
+                    {selectedLocation.hashRate} EH/S
                   </span>
                 </div>
                 <div className="flex items-center space-x-3">
