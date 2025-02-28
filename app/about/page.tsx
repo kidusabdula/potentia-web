@@ -3,7 +3,6 @@ import React from "react";
 import { motion } from "framer-motion";
 import {
   Globe,
-  Award,
   Bitcoin,
   HandCoins,
   Handshake,
@@ -11,7 +10,7 @@ import {
   BookOpen,
   Blocks,
   Cpu,
-  Shrub
+  Shrub,
 } from "lucide-react";
 import Link from "next/link";
 import { Button } from "@/components/ui/button";
@@ -63,7 +62,7 @@ const features = [
     title: "Financial Growth & Sovereignty",
     description:
       "We enable investors, miners, and institutions to gain Bitcoin exposure securely, fostering wealth generation and financial independence.",
-    icon: Shrub
+    icon: Shrub,
   },
 ];
 
@@ -187,73 +186,57 @@ const About = () => {
       </motion.section>
       {/* History Timeline */}
       <motion.section
-        className="py-20 px-6 bg-white text-black"
-        variants={staggerChildren}
-        initial="hidden"
-        whileInView="visible"
-        viewport={{ once: true, amount: 0.2 }}
+  className="py-20 px-6 bg-white text-black"
+  variants={staggerChildren}
+  initial="hidden"
+  whileInView="visible"
+  viewport={{ once: true, amount: 0.2 }}
+>
+  <div className="max-w-6xl mx-auto">
+    <motion.h2
+      className="text-4xl md:text-5xl font-extrabold text-center mb-16 text-zinc-900 tracking-tight"
+      variants={fadeInUp}
+    >
+      potentia story
+    </motion.h2>
+    <div className="relative flex justify-center">
+      {/* Single Timeline Entry */}
+      <motion.div
+        variants={fadeInUp}
+        className="relative flex flex-col items-center gap-8 max-w-2xl w-full"
+        whileHover={{ scale: 1.02 }}
+        transition={{ type: "spring", stiffness: 300 }}
       >
-        <div className="max-w-6xl mx-auto">
-          <motion.h2
-            className="text-3xl md:text-4xl font-bold text-center mb-12 text-zinc-900"
-            variants={fadeInUp}
-          >
-            potentia Story
-          </motion.h2>
-          <div className="relative">
-            {/* Vertical Timeline Line */}
-            <div className="absolute left-8 md:left-1/2 transform md:-translate-x-1/2 h-full w-1 bg-gradient-to-b from-zinc-900 to-zinc-500 z-0" />
-            <div className="space-y-16">
-              <motion.div
-                variants={fadeInUp}
-                className="relative flex items-start gap-6"
-              >
-                <div className="flex-shrink-0 w-16 h-16 bg-zinc-900 rounded-full flex items-center justify-center z-10">
-                  <Globe size={32} className="text-white" />
-                </div>
-                <div className="bg-zinc-50 p-6 rounded-lg shadow-md w-full md:w-[45%] md:mr-auto border border-zinc-200">
-                  <h3 className="text-xl font-semibold text-zinc-900">
-                    2025 - Bitcoin Mining in Africa
-                  </h3>
-                  <p className="text-zinc-700 mt-2">
-                    CEO Robert Luft discussed Bitcoin mining’s potential in
-                    Africa on Voice of America, highlighting our efforts to
-                    expand sustainable mining and economic empowerment in the
-                    region.{" "}
-                    <Link
-                      href="https://www.voaafrica.com/africa-54"
-                      target="_blank"
-                      rel="noopener noreferrer"
-                    >
-                      <span className="text-blue-600 hover:underline">
-                        Watch on VOA Africa
-                      </span>
-                    </Link>
-                  </p>
-                </div>
-              </motion.div>
-
-              <motion.div
-                variants={fadeInUp}
-                className="relative flex items-start gap-6"
-              >
-                <div className="flex-shrink-0 w-16 h-16 bg-zinc-900 rounded-full flex items-center justify-center z-10">
-                  <Award size={32} className="text-white" />
-                </div>
-                <div className="bg-zinc-50 p-6 rounded-lg shadow-md w-full md:w-[45%] md:ml-auto border border-zinc-200">
-                  <h3 className="text-xl font-semibold text-zinc-900">
-                    2025 - Industry Leader
-                  </h3>
-                  <p className="text-zinc-700 mt-2">
-                    Recognized as a top innovator in Bitcoin mining and HPC,
-                    powering 200,000+ companies with sustainable tech solutions.
-                  </p>
-                </div>
-              </motion.div>
-            </div>
-          </div>
+        {/* Icon Circle */}
+        <motion.div
+          className="flex-shrink-0 w-24 h-24 bg-gradient-to-br from-zinc-900 to-zinc-700 rounded-full flex items-center justify-center shadow-xl z-10"
+          whileHover={{ rotate: 10, scale: 1.1 }}
+          transition={{ duration: 0.3 }}
+        >
+          <Globe size={40} className="text-white" />
+        </motion.div>
+        {/* Content Card */}
+        <div className="bg-zinc-50 p-8 rounded-xl shadow-lg border border-zinc-200 w-full text-center transition-all hover:shadow-2xl hover:border-zinc-300">
+          <h3 className="text-3xl font-bold text-zinc-900 mb-4 bg-gradient-to-r from-zinc-900 to-zinc-600 bg-clip-text text-transparent">
+            2025 - Africa&apos;s Bitcoin Frontier
+          </h3>
+          <p className="text-zinc-700 text-lg leading-relaxed font-medium">
+            CEO Robert Luft took the stage on Voice of America to unveil Potentia&apos;s bold vision: revolutionizing Bitcoin mining in Africa. We&apos;re igniting sustainable innovation and empowering communities—watch the spark that started it all.{" "}
+            <Link
+              href="https://www.voaafrica.com/africa-54"
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              <span className="text-blue-600 hover:underline font-semibold transition-all hover:text-blue-800">
+                Dive into the Interview
+              </span>
+            </Link>
+          </p>
         </div>
-      </motion.section>
+      </motion.div>
+    </div>
+  </div>
+</motion.section>
       {/* Global Impact */}
       <motion.section
         className="py-14 px-6 bg-white text-black"
@@ -273,7 +256,16 @@ const About = () => {
             className="text-zinc-700 text-lg leading-relaxed max-w-4xl mx-auto"
             variants={fadeInUp}
           >
-            We are driving a global shift in Bitcoin mining by fostering economic growth and energy innovation. Through our strategic international partnerships, we help shape Bitcoin mining policies, making the industry more accessible and sustainable. Our operations empower emerging markets by creating jobs, enhancing local infrastructure, and supporting renewable energy initiatives. By prioritizing efficiency, transparency, and responsible mining practices, potentia is not just contributing to the Bitcoin network—we are shaping a future where digital assets drive real-world progress and economic empowerment on a global scale.
+            We are driving a global shift in Bitcoin mining by fostering
+            economic growth and energy innovation. Through our strategic
+            international partnerships, we help shape Bitcoin mining policies,
+            making the industry more accessible and sustainable. Our operations
+            empower emerging markets by creating jobs, enhancing local
+            infrastructure, and supporting renewable energy initiatives. By
+            prioritizing efficiency, transparency, and responsible mining
+            practices, potentia is not just contributing to the Bitcoin
+            network—we are shaping a future where digital assets drive
+            real-world progress and economic empowerment on a global scale.
           </motion.p>
         </div>
       </motion.section>
@@ -285,9 +277,7 @@ const About = () => {
         transition={{ duration: 1 }}
         viewport={{ once: true }}
       >
-        <h2 className="text-3xl md:text-4xl font-bold mb-6">
-          Build Now
-        </h2>
+        <h2 className="text-3xl md:text-4xl font-bold mb-6">Build Now</h2>
         <p className="text-zinc-300 max-w-2xl mx-auto mb-10">
           Ready to explore how Potentia can transform your business with
           innovative mining and HPC solutions? Let&apos;s connect.
