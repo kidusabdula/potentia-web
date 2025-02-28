@@ -70,7 +70,7 @@ const MapboxMap: React.FC = () => {
       coordinates: [66.9237, 48.0196],
       country: "Kazakhstan",
       region: "Akmola Region",
-      hashRate: "100",
+      hashRate: "164.79",
       facilitySize: "100",
       availability: "Open",
       networkPercentage: "14.8%",
@@ -80,7 +80,7 @@ const MapboxMap: React.FC = () => {
       coordinates: [-46.6333, -23.5505],
       country: "Brazil",
       region: "State of São Paulo",
-      hashRate: "25",
+      hashRate: "3.01",
       facilitySize: "25",
       availability: "Open",
       networkPercentage: "0.33%",
@@ -90,7 +90,7 @@ const MapboxMap: React.FC = () => {
       coordinates: [40.4897, 9.145],
       country: "Ethiopia",
       region: "Addis Ababa",
-      hashRate: "50",
+      hashRate: "22.78",
       facilitySize: "50",
       availability: "Open",
       networkPercentage: "2.5%",
@@ -100,7 +100,7 @@ const MapboxMap: React.FC = () => {
       coordinates: [-86.1349, 39.7684],
       country: "USA",
       region: "Indiana",
-      hashRate: "75",
+      hashRate: "321.68",
       facilitySize: "75",
       availability: "Open",
       networkPercentage: "35.4%",
@@ -110,7 +110,7 @@ const MapboxMap: React.FC = () => {
       coordinates: [-89.3985, 40.6331],
       country: "USA",
       region: "Illinois",
-      hashRate: "75",
+      hashRate: "1",
       facilitySize: "75",
       availability: "Open",
       networkPercentage: "35.4%",
@@ -201,7 +201,7 @@ const MapboxMap: React.FC = () => {
                 locations: 0,
               };
             }
-            acc[key].hashRate += parseInt(location.hashRate);
+            acc[key].hashRate += parseFloat(location.hashRate);
             acc[key].facilitySize += parseInt(location.facilitySize);
             acc[key].locations += 1;
             return acc;
@@ -216,7 +216,7 @@ const MapboxMap: React.FC = () => {
               <div className="flex justify-between items-center">
                 <span className="text-gray-400">Hash Rate</span>
                 <span className="font-mono text-gray-300">
-                  {data.hashRate} TH/s
+                  {data.hashRate} EH/s
                 </span>
               </div>
               <div className="flex justify-between items-center">
