@@ -10,7 +10,7 @@ const Header = () => {
   const [dropdownOpen, setDropdownOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
   const { sticky } = useNavbar();
-
+  const [dropdownTimeout, setDropdownTimeout] = useState<NodeJS.Timeout | null>(null); // To
   useEffect(() => {
     const handleScroll = () => {
       setScrolled(window.scrollY > 50);
@@ -30,7 +30,25 @@ const Header = () => {
   } hover:text-gray-300`;
 
   const mobileLinkClassName = `block px-6 py-3 text-white transition-colors duration-300 hover:text-gray-300`;
+  // Handle mouse entering the Resources button
+  const handleDropdownEnter = () => {
+    if (dropdownTimeout) {
+      clearTimeout(dropdownTimeout); // Clear any previous timeout
+    }
+    setDropdownOpen(true); // Show dropdown immediately when mouse enters
+  };
 
+  // Handle mouse leaving the Resources button or dropdown
+  const handleDropdownLeave = () => {
+    if (dropdownTimeout) {
+      clearTimeout(dropdownTimeout); // Clear any previous timeout
+    }
+    setDropdownTimeout(
+      setTimeout(() => {
+        setDropdownOpen(false); // Hide dropdown after 1 second
+      }, 500)
+    );
+  };
   return (
     <motion.header className={headerClassName}>
       <div className="max-w-7xl mx-auto px-6 py-4 flex justify-between items-center relative">
@@ -69,8 +87,8 @@ const Header = () => {
                 },
               }}
               transition={{
-                scale: { duration: 0.3, ease: "easeOut" },
-                duration: 0.3,
+                scale: { duration: 0.7, ease: "easeOut" },
+                duration: 0.7,
                 ease: "easeInOut",
               }}
             />
@@ -82,7 +100,10 @@ const Header = () => {
           <Link href="/about" className={linkClassName}>
             About
           </Link>
-          <div className="relative">
+          <div className="relative"
+           onMouseEnter={handleDropdownEnter} // Show dropdown on hover
+           onMouseLeave={handleDropdownLeave} // Start the timeout to hide dropdown
+          >
             <button
               className={`${linkClassName} flex items-center space-x-1`}
               onClick={() => setDropdownOpen(!dropdownOpen)}
