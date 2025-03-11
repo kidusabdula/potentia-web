@@ -7,6 +7,7 @@ import "@fontsource/inter/600.css";
 import "@fontsource/inter/700.css";
 import FooterSection from "@/components/Footer";
 import { NavbarProvider } from "@/context/NavBarContext";
+import { Analytics } from "@vercel/analytics/react"
 
 export const metadata: Metadata = {
   title: "Potentia",
@@ -29,6 +30,7 @@ export default function RootLayout({
           <Navbar />
           <main>{children}</main>
           <FooterSection />
+          <Analytics/>
         </NavbarProvider>
       </body>
     </html>
