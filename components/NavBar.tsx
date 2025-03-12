@@ -4,13 +4,15 @@ import Link from "next/link";
 import { Menu, X } from "lucide-react";
 import { motion } from "framer-motion";
 import { useNavbar } from "@/context/NavBarContext";
+import Image from "next/image";
 
 const Header = () => {
   const [menuOpen, setMenuOpen] = useState(false);
   const [dropdownOpen, setDropdownOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
   const { sticky } = useNavbar();
-  const [dropdownTimeout, setDropdownTimeout] = useState<NodeJS.Timeout | null>(null); // To
+  const [dropdownTimeout, setDropdownTimeout] = useState<NodeJS.Timeout | null>(null);
+
   useEffect(() => {
     const handleScroll = () => {
       setScrolled(window.scrollY > 50);
@@ -30,25 +32,17 @@ const Header = () => {
   } hover:text-gray-300`;
 
   const mobileLinkClassName = `block px-6 py-3 text-white transition-colors duration-300 hover:text-gray-300`;
-  // Handle mouse entering the Resources button
+
   const handleDropdownEnter = () => {
-    if (dropdownTimeout) {
-      clearTimeout(dropdownTimeout); // Clear any previous timeout
-    }
-    setDropdownOpen(true); // Show dropdown immediately when mouse enters
+    if (dropdownTimeout) clearTimeout(dropdownTimeout);
+    setDropdownOpen(true);
   };
 
-  // Handle mouse leaving the Resources button or dropdown
   const handleDropdownLeave = () => {
-    if (dropdownTimeout) {
-      clearTimeout(dropdownTimeout); // Clear any previous timeout
-    }
-    setDropdownTimeout(
-      setTimeout(() => {
-        setDropdownOpen(false); // Hide dropdown after 1 second
-      }, 500)
-    );
+    if (dropdownTimeout) clearTimeout(dropdownTimeout);
+    setDropdownTimeout(setTimeout(() => setDropdownOpen(false), 500));
   };
+
   return (
     <motion.header className={headerClassName}>
       <div className="max-w-7xl mx-auto px-6 py-4 flex justify-between items-center relative">
@@ -62,36 +56,35 @@ const Header = () => {
           </Link>
         </div>
 
-        {/* Logo in the Center with Hover Animation */}
+        {/* Logo in the Center */}
         <div className="absolute left-1/2 transform -translate-x-1/2">
-          <Link href="/" className={linkClassName}>
-            <motion.img
-              src={scrolled ? "/Artboardb.png" : "/Artboardw.png"}
-              alt="Logo"
-              width={90}
-              height={40}
-              className="transition-opacity duration-300"
+          <Link href="/" title="Potentia Home">
+            <motion.div
+              initial={{ opacity: 0, scale: 1 }}
               animate={{
                 opacity: 1,
                 y: scrolled ? 0 : 10,
                 scale: scrolled ? 1 : 2.5,
               }}
               whileHover={{
-                scale: scrolled ? 1.1 : 2.6, // Slightly increase scale on hover
-                y: scrolled ? -5 : 5, // Small bounce effect
-                transition: {
-                  duration: 0.7  ,
-                  ease: "easeInOut",
-                  type: "spring",
-                  stiffness: 300,
-                },
+                scale: scrolled ? 1.1 : 2.6,
+                y: scrolled ? -5 : 5,
+                transition: { duration: 0.7, type: "spring", stiffness: 300 },
               }}
-              transition={{
-                scale: { duration: 0.7, ease: "easeOut" },
-                duration: 0.7,
-                ease: "easeInOut",
-              }}
-            />
+              transition={{ duration: 0.7, ease: "easeInOut" }}
+            >
+              <Image
+                src={scrolled ? "/Artboardb.png" : "/Artboardw.png"}
+                alt="Potentia Bitcoin Mining Logo"
+                width={100}
+                height={40}
+                priority
+                quality={100}
+                className="object-contain"
+                unoptimized={true} // Ensures optimization unless SVG
+                placeholder="empty" // Disables blurry placeholder
+              />
+            </motion.div>
           </Link>
         </div>
 
@@ -100,9 +93,10 @@ const Header = () => {
           <Link href="/about" className={linkClassName}>
             About
           </Link>
-          <div className="relative"
-           onMouseEnter={handleDropdownEnter} // Show dropdown on hover
-           onMouseLeave={handleDropdownLeave} // Start the timeout to hide dropdown
+          <div
+            className="relative"
+            onMouseEnter={handleDropdownEnter}
+            onMouseLeave={handleDropdownLeave}
           >
             <button
               className={`${linkClassName} flex items-center space-x-1`}
@@ -168,39 +162,19 @@ const Header = () => {
         transition={{ duration: 0.4, ease: "easeInOut" }}
       >
         <div className="flex flex-col items-start pt-20 px-6 space-y-6">
-          <Link
-            href="/"
-            className={mobileLinkClassName}
-            onClick={() => setMenuOpen(false)}
-          >
+          <Link href="/" className={mobileLinkClassName} onClick={() => setMenuOpen(false)}>
             Home
           </Link>
-          <Link
-            href="/about"
-            className={mobileLinkClassName}
-            onClick={() => setMenuOpen(false)}
-          >
+          <Link href="/about" className={mobileLinkClassName} onClick={() => setMenuOpen(false)}>
             About Us
           </Link>
-          <Link
-            href="/facilities"
-            className={mobileLinkClassName}
-            onClick={() => setMenuOpen(false)}
-          >
+          <Link href="/facilities" className={mobileLinkClassName} onClick={() => setMenuOpen(false)}>
             Facilities
           </Link>
-          <Link
-            href="/learn"
-            className={mobileLinkClassName}
-            onClick={() => setMenuOpen(false)}
-          >
+          <Link href="/learn" className={mobileLinkClassName} onClick={() => setMenuOpen(false)}>
             Learn
           </Link>
-          <Link
-            href="/faq"
-            className={mobileLinkClassName}
-            onClick={() => setMenuOpen(false)}
-          >
+          <Link href="/faq" className={mobileLinkClassName} onClick={() => setMenuOpen(false)}>
             Downloadables
           </Link>
         </div>
